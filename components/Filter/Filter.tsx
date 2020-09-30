@@ -5,10 +5,13 @@ interface Props {
 
 export const Filter: React.FC<Props> = ({ value, setValue }) => {
     return (
-        <input 
-            type="text"
-            value={value}
-            onChange={(ev) => setValue(ev.target.value)}
-        />
+        <>
+            <input 
+                type="text"
+                value={value}
+                onChange={(ev) => setValue(ev.target.value)}
+            />
+            <button type="button">Search</button>
+        </>
     )
 }
