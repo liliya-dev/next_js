@@ -1,0 +1,40 @@
+.nav {
+    padding: 30px 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__list {
+        display: flex;
+        width: 50%;
+        justify-content: space-between;
+    }
+
+    &__list_small {
+        display: flex;
+        width: 15%;
+        justify-content: flex-end;
+    }
+
+    &__item {
+        text-transform: uppercase;
+    }
+
+    &__link {
+        padding: 16px;
+        transition: 1s color, 1s background-color;
+
+        &:hover {
+            color: #131313;
+        }
+    }
+
+    &__logo {
+        width: 8vw;
+        height: 8vw;
+    }
+}
+
+
+
