@@ -12,18 +12,19 @@ interface Props {
 }
 
 export const Filter: React.FC<Props> = ({ beerName, foodPairing, setParams }) => {
-    const [hop, setHop] = useState('Fuggles');
+    const [hops, setHops] = useState('Fuggles');
     const [malt, setMalt] = useState('Munich');
 
     const handleChangeSelectOption = (value: string, option: string) => {
         switch (option) {
-            case 'hop':
-                setHop(value);
+            case 'hops':
+                setHops(value);
                 break;
             case 'malt': 
                 setMalt(value);
                 break;
         }
+        setParams(value, option);
     }
 
     return (
@@ -67,9 +68,9 @@ export const Filter: React.FC<Props> = ({ beerName, foodPairing, setParams }) =>
                 />
             </div>
             <Select 
-                currentOption={hop} 
+                currentOption={hops} 
                 optionsList={hopsList} 
-                optionName="hop"
+                optionName="hops"
                 handleChangeSelectOption={handleChangeSelectOption} 
             />
             <Select 

@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { convertToString } from '../../helpers/convertToString';
 import classes from './beersPage.module.scss';
 import { Beer } from "../../components/BeersList/interfaces";
+import { hopsList } from '../../components/Filter/constants';
 
 interface Props {
     beersList: Beer[];
@@ -14,18 +15,22 @@ interface Props {
 
 const BeersPage: NextPage<Props> = ({ beersList }) => {
     const router = useRouter();
-    const [beerName, setBeerName] = useState<string>(convertToString(router.query.beer_name));
-    const [foodPairing, setFoodPairing] = useState<string>(convertToString(router.query.food_pairing));
+    const [beerName, setBeerName] = useState(convertToString(router.query.beer_name));
+    const [foodPairing, setFoodPairing] = useState(convertToString(router.query.food_pairing));
+    const [malt, setMalt] = useState(convertToString(router.query.malt));
+    const [hops, setHops] = useState(convertToString(router.query.hops));
 
     useEffect(() => {
         router.push({
             query: { 
                 beer_name: beerName,
                 food_pairing: foodPairing,
+                malt,
+                hops
             },
         });
         
-    }, [beerName, foodPairing]);
+    }, [beerName, foodPairing, hops, malt]);
 
     const handleChangeParams = (value: string, option: string) => {
         switch (option) {
@@ -33,7 +38,14 @@ const BeersPage: NextPage<Props> = ({ beersList }) => {
                 setBeerName(value);
                 break;
             case 'foodPairing':
-                setFoodPairing(value)
+                setFoodPairing(value);
+                break;
+            case 'malt': 
+                setMalt(value.split(' ').join('_'));
+                break;
+            case 'hops':
+                setHops(value.split(' ').join('_'));
+                break;
         }  
     }
 
@@ -68,6 +80,8 @@ BeersPage.getInitialProps = async (context: NextPageContext) => {
             }
         }
     );
+
+    console.log(searchParametrs, "search");
     const response = await fetch(`https://api.punkapi.com/v2/beers?${searchParametrs}&per_page=80`);
     const beersList = await response.json();
     return { 
