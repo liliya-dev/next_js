@@ -4,38 +4,44 @@ import { Filter } from '../../components/Filter/Filter';
 import { useRouter } from 'next/router'
 import { useState, useEffect } from "react";
 
-function debounce(f, t) {
-    return function (args) {
-      let previousCall = this.lastCall;
-      this.lastCall = Date.now();
-      if (previousCall && ((this.lastCall - previousCall) <= t)) {
-        clearTimeout(this.lastCallTimer);
-      }
-      this.lastCallTimer = setTimeout(() => f(args), t);
-    }
-  }
-
-
 export default function BeersPage({ beersList }) {
-    const [query, setQuery] = useState('');
     const router = useRouter();
+    const initialQuery = 
+        typeof router.query.beer_name === 'string' || typeof router.query.beer_name === 'undefined'
+            ? router.query.beer_name 
+            : router.query.beer_name.join();
+    const [name, setName] = useState<string>(initialQuery);
+    const [page, setPage] = useState(router.query.page);
 
     useEffect(() => {
         router.push({
             query: { 
-                beer_name: query,
+                beer_name: name,
                 page: 1 
             },
         });
-    }, [query]);
+        
+    }, [name]);
 
     const handleChangeQuery = (value: string) => {
-        setQuery(value);
+        setName(value);
+    }
+
+
+    const makeApiCall = () => {
+        const params = {
+            beer_name: name,
+            page,
+        };
+        router.push({
+            query: params,
+        });
+
     }
 
     return (
         <MainLayout title="about">
-            <Filter value={query} setValue={handleChangeQuery}/>
+            <Filter value={name} setValue={handleChangeQuery} makeApiCall={makeApiCall}/>
             {
                 beersList.length
                     ?  <BeersList beersList={beersList}/>
@@ -47,7 +53,6 @@ export default function BeersPage({ beersList }) {
 }
 
 BeersPage.getInitialProps = async (context) => {
-    console.log(context.query, "context.query")
     let searchParametrs = '';
     Object.entries(context.query).forEach(
         param => {
@@ -56,8 +61,7 @@ BeersPage.getInitialProps = async (context) => {
             }
         }
     );
-
-    console.log(searchParametrs);
+    console.log(searchParametrs)
     const response = await fetch(`https://api.punkapi.com/v2/beers?${searchParametrs}`);
     const beersList = await response.json();
     return { 

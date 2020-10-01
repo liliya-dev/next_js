@@ -1,20 +1,30 @@
-import classes from "./Filter.module.scss"
+import classes from "./Filter.module.scss";
+import { DebounceInput } from 'react-debounce-input';
 
 interface Props {
     value: string;
     setValue: (value: string) => (void);
+    makeApiCall: () => (void);
 }
 
-export const Filter: React.FC<Props> = ({ value, setValue }) => {
+export const Filter: React.FC<Props> = ({ value, setValue, makeApiCall }) => {
+
     return (
         <>
-            <input 
+            <DebounceInput
+                minLength={2}
+                debounceTimeout={2000}
+                value={value}
+                onChange={(event) => setValue(event.target.value)}
                 className={classes.input}
                 type="text"
-                value={value}
-                onChange={(ev) => setValue(ev.target.value)}
             />
-            <button type="button">Search</button>
+            <button 
+                type="button"
+                onClick={makeApiCall}
+            >
+                Search
+            </button>
         </>
     )
 }
