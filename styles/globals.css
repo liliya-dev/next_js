@@ -1,9 +1,19 @@
 html,
-body {
+body,
+a, 
+button,
+input::placeholder,
+input {
   padding: 0;
   margin: 0;
   font-family: 'Quicksand', sans-serif;
   color: #5e5b5b;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+input::placeholder {
+  opacity: 0.6;
 }
 
 
@@ -28,4 +38,9 @@ h1, h2, h3, h4, h5, h5, p {
 
 input, button {
   outline: none;
+}
+
+input:hover,
+button:hover {
+  cursor: pointer;
 }

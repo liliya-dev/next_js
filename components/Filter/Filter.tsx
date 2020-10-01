@@ -1,30 +1,83 @@
 import classes from "./Filter.module.scss";
 import { DebounceInput } from 'react-debounce-input';
+import filter from './filter.png';
+import { hopsList, maltsList } from './constants';
+import { Select } from '../Select/Select';
+import { useState } from "react";
 
 interface Props {
-    value: string;
-    setValue: (value: string) => (void);
-    makeApiCall: () => (void);
+    beerName: string;
+    foodPairing: string
+    setParams: (value: string, option: string) => (void);
 }
 
-export const Filter: React.FC<Props> = ({ value, setValue, makeApiCall }) => {
+export const Filter: React.FC<Props> = ({ beerName, foodPairing, setParams }) => {
+    const [hop, setHop] = useState('Fuggles');
+    const [malt, setMalt] = useState('Munich');
+
+    const handleChangeSelectOption = (value: string, option: string) => {
+        switch (option) {
+            case 'hop':
+                setHop(value);
+                break;
+            case 'malt': 
+                setMalt(value);
+                break;
+        }
+    }
 
     return (
-        <>
+        <div className={classes.container}>
+            <div className={classes.wrapper}>
+                <img src={filter} alt=""/>
+                <button 
+                    type="button"
+                    className={classes.buttonClear}
+                >
+                    <h5>Clear all filters</h5>
+                </button>
+            </div>
             <DebounceInput
                 minLength={2}
                 debounceTimeout={2000}
-                value={value}
-                onChange={(event) => setValue(event.target.value)}
+                value={beerName}
+                onChange={(event) => setParams(event.target.value, 'beerName')}
                 className={classes.input}
                 type="text"
+                placeholder="Enter the beer name"
             />
-            <button 
-                type="button"
-                onClick={makeApiCall}
-            >
-                Search
-            </button>
-        </>
+            <DebounceInput
+                minLength={2}
+                debounceTimeout={2000}
+                value={foodPairing}
+                onChange={(event) => setParams(event.target.value, 'foodPairing')}
+                className={classes.input}
+                type="text"
+                placeholder="Enter the dish"
+            />
+            <div className={classes.slidecontainer}>
+                <h5 className={classes.title}>Rating</h5>
+                <input 
+                    type="range" 
+                    min="1" 
+                    max="100" 
+                    onChange={(ev) => console.log(ev.target.value)}
+                    className={classes.slider} 
+                    id="myRange" 
+                />
+            </div>
+            <Select 
+                currentOption={hop} 
+                optionsList={hopsList} 
+                optionName="hop"
+                handleChangeSelectOption={handleChangeSelectOption} 
+            />
+            <Select 
+                currentOption={malt} 
+                optionsList={maltsList} 
+                optionName="malt" 
+                handleChangeSelectOption={handleChangeSelectOption} 
+            />
+        </div>
     )
 }

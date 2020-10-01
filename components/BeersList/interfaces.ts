@@ -11,4 +11,16 @@ export interface Beer {
     abv: number;
     description: string;
     ph: number;
+    ingredients: {
+        malt: {
+            name: string;
+            amount: {
+                unit: string;
+                value: number;
+            }
+        }[];
+        hops: {
+            name: string
+        }[]
+    }
 }
