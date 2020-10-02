@@ -12,19 +12,35 @@ interface Props {
 }
 
 export const Filter: React.FC<Props> = ({ beerName, foodPairing, setParams }) => {
-    const [hops, setHops] = useState('Fuggles');
-    const [malt, setMalt] = useState('Munich');
+    const [hops, setHops] = useState<string[]>([]);
+    const [malt, setMalt] = useState<string[]>([]);
 
-    const handleChangeSelectOption = (value: string, option: string) => {
+    const handleChangeSelectedList = (value: string, option: string, action: string) => {
+        let params;
         switch (option) {
             case 'hops':
-                setHops(value);
+                let updatedHops;
+                if (action === 'add') {
+                    updatedHops = (hops.includes(value)) ? hops :[...hops, value];
+                } else {
+                    updatedHops = hops.filter(option => option !== value);
+                }
+                setHops(updatedHops);
+                params = updatedHops.map(hop => hop.split(' ').join('_')).join('|')
                 break;
-            case 'malt': 
-                setMalt(value);
+
+            case 'malt':
+                let updatedMalt;
+                if (action === 'add') {
+                    updatedMalt = malt.includes(value) ? malt :[...hops, value];
+                } else {
+                    updatedMalt = hops.filter(option => option !== value);
+                }
+                setMalt(updatedHops);
+                params = updatedMalt.map(malt => malt.split(' ').join('_')).join('|')
                 break;
         }
-        setParams(value, option);
+        setParams(params, option);
     }
 
     return (
@@ -68,16 +84,18 @@ export const Filter: React.FC<Props> = ({ beerName, foodPairing, setParams }) =>
                 />
             </div>
             <Select 
-                currentOption={hops} 
+                selectedList={hops}
+                currentOption="select"
                 optionsList={hopsList} 
                 optionName="hops"
-                handleChangeSelectOption={handleChangeSelectOption} 
+                handleChangeSelectedList={handleChangeSelectedList} 
             />
             <Select 
-                currentOption={malt} 
+                selectedList={malt}
+                currentOption="select" 
                 optionsList={maltsList} 
                 optionName="malt" 
-                handleChangeSelectOption={handleChangeSelectOption} 
+                handleChangeSelectedList={handleChangeSelectedList} 
             />
         </div>
     )

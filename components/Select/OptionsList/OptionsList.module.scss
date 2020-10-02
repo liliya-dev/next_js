@@ -1,0 +1,25 @@
+
+.select {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    box-shadow: 5px 10px 15px -4px #515151;
+    font-size: 12px;
+    
+
+    &__item {
+        width: 100%;
+        padding: 10px 0 10px 10px;
+        display: flex;
+
+        &:hover {
+            cursor: pointer
+        }
+    }
+}
+
+.checkbox {
+  margin-right: 15px;
+}

@@ -1,0 +1,25 @@
+
+.selected {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  
+  
+    &__item {
+      font-size: 10px;
+      margin-right: 4px;
+      padding: 5px 10px;
+      border: 1px solid gray;
+      margin-bottom: 5px;
+        
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  
+  .button__delete {
+    color: red;
+    margin-left: 10px;
+  }

@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
 import classes from './Select.module.scss';
+import { SelectedList } from './SelectedList/SelectedList';
+import { OptionsList } from './OptionsList/OPtionsList';
 
 interface Props {
+    selectedList: string[];
     currentOption: string;
     optionsList: string[];
     optionName: string;
-    handleChangeSelectOption: (value: string, option: string) => (void);
+    handleChangeSelectedList: (value: string, option: string, action: string) => (void);
 }
 
 export const Select: React.FC<Props> = ({ 
-    currentOption, optionsList, optionName, handleChangeSelectOption 
+    currentOption, optionsList, optionName, handleChangeSelectedList, 
+    selectedList
 }) => {
     const [isVisible, setIsVisible] = useState(false);
     const toggleVisibility = (ev) => {
-        if(ev.target.classList[0] !== classes.select__item) {
+        if (!ev.target.closest(`.${classes.container}`)) {
             setIsVisible(false)
         }
     };
@@ -27,6 +31,11 @@ export const Select: React.FC<Props> = ({
     return (
         <div className={classes.container}>
             <h5 className={classes.title}>{optionName}:</h5>
+           <SelectedList 
+                selectedList={selectedList} 
+                handleChangeSelectedList={handleChangeSelectedList}
+                optionName={optionName}
+            />
             <div className={classes.wrapper}>
                 <div  
                     className={
@@ -38,26 +47,15 @@ export const Select: React.FC<Props> = ({
                 >
                     {currentOption}	
                 </div>  
-                
                 {
                     isVisible && (
-                        <ul className={classes.select}>
-                            {
-                                optionsList
-                                    .filter(option => option !== currentOption)
-                                    .map(option => (
-                                    <li
-                                        className={classes.select__item}
-                                        onClick={() => {
-                                            handleChangeSelectOption(option, optionName);
-                                            setIsVisible(false);
-                                        }}
-                                    >
-                                        - {option}
-                                    </li>
-                                ))
-                            }
-                        </ul>
+                        <OptionsList 
+                            optionName={optionName}
+                            currentOption={currentOption}
+                            optionsList={optionsList}
+                            selectedList={selectedList}
+                            handleChangeSelectedList={handleChangeSelectedList}
+                        />
                     )
                 }
             </div>
