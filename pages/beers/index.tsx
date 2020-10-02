@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import { convertToString } from '../../helpers/convertToString';
 import classes from './beersPage.module.scss';
 import { Beer } from "../../components/BeersList/interfaces";
-import { hopsList } from '../../components/Filter/constants';
 
 interface Props {
     beersList: Beer[];
@@ -19,6 +18,8 @@ const BeersPage: NextPage<Props> = ({ beersList }) => {
     const [foodPairing, setFoodPairing] = useState(convertToString(router.query.food_pairing));
     const [malt, setMalt] = useState(convertToString(router.query.malt));
     const [hops, setHops] = useState(convertToString(router.query.hops));
+
+    console.log(beersList)
 
     useEffect(() => {
         router.push({
@@ -81,7 +82,6 @@ BeersPage.getInitialProps = async (context: NextPageContext) => {
         }
     );
 
-    console.log(searchParametrs, "search");
     const response = await fetch(`https://api.punkapi.com/v2/beers?${searchParametrs}&per_page=80`);
     const beersList = await response.json();
     return { 

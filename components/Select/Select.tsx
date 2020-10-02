@@ -31,11 +31,15 @@ export const Select: React.FC<Props> = ({
     return (
         <div className={classes.container}>
             <h5 className={classes.title}>{optionName}:</h5>
-           <SelectedList 
-                selectedList={selectedList} 
-                handleChangeSelectedList={handleChangeSelectedList}
-                optionName={optionName}
-            />
+            {
+                (selectedList.length !== 0) && (
+                    <SelectedList 
+                        selectedList={selectedList} 
+                        handleChangeSelectedList={handleChangeSelectedList}
+                        optionName={optionName}
+                    />
+                )
+            }
             <div className={classes.wrapper}>
                 <div  
                     className={
