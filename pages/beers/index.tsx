@@ -2,12 +2,11 @@ import { NextPage, NextPageContext } from 'next';
 import { BeersList } from "../../components/BeersList/BeersList";
 import { MainLayout } from "../../components/Layouts/MainLayout/MainLayout";
 import { Filter } from '../../components/Filter/Filter';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import { useState, useEffect } from "react";
 import { convertToString } from '../../helpers/convertToString';
 import classes from './beersPage.module.scss';
 import { Beer } from "../../components/BeersList/interfaces";
-import { hopsList } from '../../components/Filter/constants';
 
 interface Props {
     beersList: Beer[];
@@ -81,19 +80,16 @@ BeersPage.getInitialProps = async (context: NextPageContext) => {
         }
     );
 
-  
-    const r = await fetch('https://www.thecocktaildb.com/api.php');
-
-    const fli = await fetch("http://engine.hotellook.com/api/v2/search/start.json?iata=HKT&checkIn=2018-08-10&checkOut=2018-08-13&adultsCount=2&customerIP=100.168.1.1&childrenCount=1&childAge1=8&lang=ru&currency=USD&waitForResult=0&marker=УкажитеВашМаркер&signature=a475100374414df97a9c6c7d7731b3c6")
-    const dd = await fetch("https://rapidapi.p.rapidapi.comhttps//www.travelopro.com/api.php", {
+    const res = await fetch("https://rapidapi.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/UAH/en-GB/?query=Kiev", {
         "method": "GET",
         "headers": {
             "x-rapidapi-key": "e99f359a1bmsh2ac75c186a93832p12e282jsn579a9b55eb2e",
-            "x-rapidapi-host": "travelo-pro.p.rapidapi.com"
+            "x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
         }
     })
-   const tt = await dd.json()
-   console.log(tt, "search");
+
+    const data = await res.json()
+
     const response = await fetch(`https://api.punkapi.com/v2/beers?${searchParametrs}&per_page=80`);
     const beersList = await response.json();
     return { 

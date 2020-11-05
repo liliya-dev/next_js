@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import classes from './Select.module.scss';
 import { SelectedList } from './SelectedList/SelectedList';
-import { OptionsList } from './OptionsList/OPtionsList';
+import { OptionsList } from './OptionsList/OptionsList';
 
 interface Props {
     selectedList: string[];
