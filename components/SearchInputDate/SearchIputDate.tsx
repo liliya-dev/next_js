@@ -1,14 +1,11 @@
 import { useState } from "react";
 import classes from './SearchInputDate.module.scss';
 import DatePicker from "react-datepicker";
- 
 import "react-datepicker/dist/react-datepicker.css";
 
-export const SearchIputDate = ({ text, initialDate, updateDate }) => {
-  const [selectedDate, setSelectedDate] = useState(new Date(initialDate));
-
+export const SearchIputDate = ({ text, minDate, selectedDate, updateDate, option }) => {
   const handleDateChange = (date) => {
-    updateDate(Date.parse(date));
+    updateDate(Date.parse(date), option);
   }
 
   return (
@@ -19,6 +16,7 @@ export const SearchIputDate = ({ text, initialDate, updateDate }) => {
         className={classes.dateContainer}
         onChange={handleDateChange}
         dateFormat="dd.MM.yyyy"
+        minDate={minDate}
       />
     </div>
   )

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Navigation } from '../../Navigation/Navigation';
 import classes from './MainLayout.module.scss';
 import Head from 'next/head';
 
@@ -12,7 +11,6 @@ export const MainLayout = ({ children, title = "Beer" }) => {
             </Head>
             <div className={classes.layout}>    
                 <div className={classes.container}>
-                    <Navigation />
                     {children}
                 </div>
             </div>

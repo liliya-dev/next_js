@@ -1,3 +1,5 @@
+@import './vars.scss';
+
 html,
 body,
 a, 
@@ -7,9 +9,7 @@ input {
   padding: 0;
   margin: 0;
   font-family: 'Quicksand', sans-serif;
-  color: #5e5b5b;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  color: #111236;
 }
 
 input::placeholder {
@@ -38,6 +38,8 @@ h1, h2, h3, h4, h5, h5, p {
 
 input, button {
   outline: none;
+  border-radius: .25rem;
+  border: none
 }
 
 input:hover,

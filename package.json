@@ -18,6 +18,7 @@
     "react-debounce-input": "^3.2.3",
     "react-dom": "16.13.1",
     "react-input-select": "^1.0.3",
+    "react-loader-spinner": "^3.1.14",
     "react-select": "^3.1.0",
     "sass": "^1.26.11"
   },
