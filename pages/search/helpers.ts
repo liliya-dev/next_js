@@ -13,6 +13,7 @@ export const getSuggestions = async (query) => {
   }
   
   const data = await response.json();
+  console.log(data)
   
   let suggestions;
 
@@ -42,7 +43,6 @@ export const getHotels = async (checkIn, checkOut, lat, lon) => {
   })
 
   const data = await response.json();
-  console.log(data.data.body.searchResults)
   
   return data.data.body.searchResults;
 }

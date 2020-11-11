@@ -1,0 +1,24 @@
+.price {
+  color: var(--highlited-color);
+  margin-bottom: 10px;
+}
+
+.sale {
+  border-radius: 4px;
+  padding: 10px 5px;
+  background-color: var(--highlited-color);
+  color: var(--text-color);
+  width: fit-content;
+  margin-bottom: 10px;
+}
+
+.oldPrice {
+  text-decoration: line-through;
+}
+
+.priceContainer {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}

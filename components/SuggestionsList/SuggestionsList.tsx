@@ -1,5 +1,5 @@
-import classes from './SuggestionsList.module.scss'
-import Loader from 'react-loader-spinner'
+import classes from './SuggestionsList.module.scss';
+import Loader from 'react-loader-spinner';
 
 interface Suggestion {
   geoId: string,

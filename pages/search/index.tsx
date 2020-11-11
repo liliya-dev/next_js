@@ -41,6 +41,7 @@ const SearchPage: NextPage<Props> = () => {
       setIsLoading(true);
       setIsError(false);
         const list = await getSuggestions(nearBy);
+
         if (list instanceof Error)  {
           setIsError(true);
           setIsLoading(false);
@@ -72,17 +73,16 @@ const SearchPage: NextPage<Props> = () => {
   const searchHotels = () => {
     if (nearBy === '') {
     } else {
-      // getHotels(checkIn, checkOut, selectedPlace.latitude, selectedPlace.longitude);
       router.push({
         pathname: '/results',
         query: {
           checkIn,
           checkOut,
           lat: selectedPlace.latitude,
-          lon: selectedPlace.longitude
+          lon: selectedPlace.longitude,
+          page: 1
         }
       })
-      console.log(router.pathname)
     }
   }
  
