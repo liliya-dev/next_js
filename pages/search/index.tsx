@@ -74,7 +74,7 @@ const SearchPage: NextPage<Props> = () => {
     if (nearBy === '') {
     } else {
       router.push({
-        pathname: '/results',
+        pathname: '/accomodations',
         query: {
           checkIn,
           checkOut,

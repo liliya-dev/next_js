@@ -4,18 +4,16 @@ import classes from './AccomodationList.module.scss';
 import Loader from 'react-loader-spinner'
 
 interface Props {
-  hotels: searchResult[],
-  scrollableEl: any
+  hotels: searchResult[]
 }
 
-export const AccomodationsList: React.FC<Props> = ({ hotels, scrollableEl }) => {
+export const AccomodationsList: React.FC<Props> = ({ hotels }) => {
   return (
     <div>
       <p>list</p>
       <ul 
         className={classes.container}
         onScroll={(ev) => console.log(ev)}
-        ref={scrollableEl}
       >
         {
           (hotels && hotels.length > 0) && (

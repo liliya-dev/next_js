@@ -1,10 +1,9 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AccomodationsList } from "../../components/AccomodationsList/AccomodationsList";
 import { getHotels } from './helpers';
 import { searchResult } from './interface';
-import { Pagination } from '../../components/Pagination/Pagination';
 import Link from 'next/link'
 
 interface Props {
@@ -15,20 +14,12 @@ interface Props {
   nextPage: number
 }
 
-function scrollTo(container: any) {
-  container.scrollTop = 200;
-  console.log(88)
-}
-
-const Results: NextPage<Props> = ({ hotels, isError, page, nextPage }) => {
+const AccomodationsPage: NextPage<Props> = ({ hotels, isError, page, nextPage }) => {
   const router = useRouter();
   const [hotelsList, setHotelsList] = useState([]);
-  const [yScroll, setYscroll] = useState(0);
-  const scrollableEl = useRef(null);
 
   useEffect(() => {
     setHotelsList([...hotelsList, ...hotels])
-    scrollTo(scrollableEl.current)
   }, [hotels]);
 
   useEffect(() => {
@@ -74,7 +65,7 @@ const Results: NextPage<Props> = ({ hotels, isError, page, nextPage }) => {
         )
         : (
           <>
-            <AccomodationsList hotels={hotelsList} scrollableEl={scrollableEl} />
+            <AccomodationsList hotels={hotelsList} />
             {
               (nextPage !== 1)  &&  (
                 <button 
@@ -119,4 +110,4 @@ export async function getServerSideProps(context) {
   } 
 }
 
-export default Results;
+export default AccomodationsPage;
