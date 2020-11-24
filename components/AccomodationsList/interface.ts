@@ -1,4 +1,5 @@
 export interface searchResult {
+  id: number,
   address: {
     countryCode: string,
     countryName: string,

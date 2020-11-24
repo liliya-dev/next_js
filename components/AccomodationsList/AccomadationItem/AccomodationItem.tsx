@@ -13,9 +13,10 @@ interface Props {
 
 export const AccomodationItem: React.FC<Props> = ({ hotel }) => {
   const [isMapVisible, setIsmapVisible] = useState(false);
+  console.log(hotel)
   return (
       <li className={classes.container}>
-        <Link href={`/accomodations/${encodeURIComponent(hotel.supplierHotelId)}`}>
+        <Link href={`/accomodations/${encodeURIComponent(hotel.id)}`}>
           <p className={`${classes.title} fs-14-bold`}>{hotel.name}</p>
         </Link>
           <p className={`${classes.address} fs-14`}>{formatAddress(hotel.address)}</p>

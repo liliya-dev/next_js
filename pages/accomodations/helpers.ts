@@ -14,3 +14,17 @@ export const getHotels = async (checkIn, checkOut, lat, lon, page) => {
   
   return data.data.body.searchResults;
 }
+
+export const getCurrentHotel = async (id) => {
+  const response = await fetch(`https://hotels-com-free.p.rapidapi.com/pde/property-details/v1/hotels.com/${id}?checkIn=2021-01-27&locale=en_US&rooms=1&checkOut=2021-01-28&currency=USD&include=neighborhood`, {
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-key": "e99f359a1bmsh2ac75c186a93832p12e282jsn579a9b55eb2e",
+      "x-rapidapi-host": "hotels-com-free.p.rapidapi.com"
+    }
+  })
+  const data = await response.json();
+  console.log(data)
+  
+  return data.data
+}

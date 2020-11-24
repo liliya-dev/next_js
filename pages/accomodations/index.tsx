@@ -5,25 +5,31 @@ import { AccomodationsList } from "../../components/AccomodationsList/Accomodati
 import { getHotels } from './helpers';
 import { searchResult } from './interface';
 import Link from 'next/link'
+import classes from './accomodationsPage.module.scss';
 
 interface Props {
   isError: boolean,
   hotels: searchResult[],
   count: number,
   page: number,
-  nextPage: number
+  nextPage: number,
+  isLoaded: boolean
 }
 
-const AccomodationsPage: NextPage<Props> = ({ hotels, isError, page, nextPage }) => {
+const AccomodationsPage: NextPage<Props> = ({ hotels, isError, page, nextPage, isLoaded }) => {
   const router = useRouter();
   const [hotelsList, setHotelsList] = useState([]);
+  const [successLoaded, setSuccessLoaded] = useState(false);
 
   useEffect(() => {
-    setHotelsList([...hotelsList, ...hotels])
-  }, [hotels]);
+    setTimeout(() => {
+      setHotelsList([...hotelsList, ...hotels]);
+      setSuccessLoaded(isLoaded);
+    }, 2000)
+  }, [hotels, isLoaded]);
 
   useEffect(() => {
-    if (page !== 1) {
+    if (page != 1) {
       setHotelsList([])
       router.push({
         query: {
@@ -35,6 +41,7 @@ const AccomodationsPage: NextPage<Props> = ({ hotels, isError, page, nextPage })
   }, [])
 
   const changePage = () => {
+    setSuccessLoaded(false)
       router.push({
       query: {
         ...router.query,
@@ -47,9 +54,10 @@ const AccomodationsPage: NextPage<Props> = ({ hotels, isError, page, nextPage })
     router.reload();
   }
   return (
-    <div>
+    <div className={classes.container}>
       <button 
         type="button"
+        className={classes.loadButton} 
       >
          <Link href="/search">
             <a>Back to search</a>
@@ -65,11 +73,12 @@ const AccomodationsPage: NextPage<Props> = ({ hotels, isError, page, nextPage })
         )
         : (
           <>
-            <AccomodationsList hotels={hotelsList} />
+            <AccomodationsList hotels={hotelsList} isLoaded={successLoaded}/>
             {
               (nextPage !== 1)  &&  (
                 <button 
-                  type="button" 
+                  type="button"
+                  className={classes.loadButton} 
                   onClick={changePage}
                 >
                   more results
@@ -87,17 +96,20 @@ export async function getServerSideProps(context) {
   const { checkIn, checkOut, lat, lon, page } = context.query;
   try {
     const hotels = await getHotels(checkIn, checkOut, lat, lon, page);
-    return {
-      props: {
-        hotels: hotels.results,
-        isError: false,
-        count: hotels.totalCount,
-        nextPage: hotels.pagination.nextPageNumber,
-        page
+    const nextNumber = hotels.pagination ? hotels.pagination.nextPageNumber : 1;
+    if (hotels.results) {
+      return {
+        props: {
+          hotels: hotels.results || [],
+          isError: false,
+          nextPage: nextNumber,
+          page,
+          isLoaded: true
+        }
       }
     }
   } catch (error) {
-    console.log(error)
+    console.log(error, 8767)
     return {
       props: {
         hotels: [],
