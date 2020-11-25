@@ -75,7 +75,7 @@ const AccomodationsPage: NextPage<Props> = ({ hotels, isError, page, nextPage, i
           <>
             <AccomodationsList hotels={hotelsList} isLoaded={successLoaded}/>
             {
-              (nextPage !== 1)  &&  (
+              (nextPage !== 1 && hotelsList.length > 0)  &&  (
                 <button 
                   type="button"
                   className={classes.loadButton} 

@@ -24,7 +24,19 @@ export const getCurrentHotel = async (id) => {
     }
   })
   const data = await response.json();
-  console.log(data)
   
   return data.data
 }
+
+export const getCurrentHotelPhotots = async (id) => {
+  const response = await fetch(`https://hotels-com-free.p.rapidapi.com/nice/image-catalog/v2/hotels/${id}`, {
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-key": "e99f359a1bmsh2ac75c186a93832p12e282jsn579a9b55eb2e",
+      "x-rapidapi-host": "hotels-com-free.p.rapidapi.com"
+    }
+  })
+  const data = await response.json();
+  return data
+}
+
