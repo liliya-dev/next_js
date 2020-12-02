@@ -27,3 +27,23 @@
 .title {
   margin-bottom: 45px;
 }
+
+.infoButton {
+  background-color: transparent;
+  margin: 25px 0;
+  transition: 0.3s;
+  display: flex;
+
+  & > div {
+    transition: 0.3s;
+    margin-left: 10px;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 1;
+  }
+}

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from './HotelWithDetails.module.scss';
 import { PhotosCarousel } from './PhotosCarousel/PhotosCarousel';
 import { Reviews } from './Reviews/Reviews';
 import { Hotel } from './interface';
 import { Maps } from '../Maps/Maps';
 import { Overview } from './Overview/Overview';
+import { MoreInfo } from './MoreInfo/MoreInfo';
+import { BookList } from './BookList/BookList';
 
 interface Props {
   hotelData: Hotel,
@@ -12,6 +14,8 @@ interface Props {
 }
 
 export const HotelWithDetails: React.FC<Props> = ({ hotelData, photos }) => {
+  const [isInfoVisible, setIsInfoVisible] = useState(false);
+
   return (
     <div className={classes.container}>
       <h2 className={classes.title} >{hotelData.body.propertyDescription.name}</h2>
@@ -31,6 +35,20 @@ export const HotelWithDetails: React.FC<Props> = ({ hotelData, photos }) => {
         </div>
       </div>
       <Overview overview={hotelData.body.overview}/>
+      <button 
+        type="button" 
+        className={`${classes.infoButton} fs-16-italic-bold`}
+        onClick={() => setIsInfoVisible(!isInfoVisible)}
+      >
+        More info about accomodation 	
+        <div style={{ transform: isInfoVisible ? 'rotate(0deg)' : 'rotate(180deg)'}}>&#8679;</div>
+      </button>
+      {
+        isInfoVisible && <MoreInfo info={hotelData.body.atAGlance}/>
+      }
+      <div>
+        <BookList rooms={hotelData.body.roomsAndRates.rooms}/>
+      </div>
     </div>
   )
 }

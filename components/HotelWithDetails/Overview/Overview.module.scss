@@ -6,3 +6,28 @@
   width: 100%;
   display: flex;
 }
+
+.check {
+  color: var(--primary-button-color);
+  margin-right: 10px;
+}
+
+.overviewTitle {
+  margin-bottom: 10px;
+}
+
+.overviewSmallItem {
+  display: flex;
+
+  & > p > b {
+    font-weight: normal;
+  }
+}
+
+.overviewSmallList {
+  margin-right: 30px;
+}
+
+.title {
+  margin-bottom: 15px;
+}

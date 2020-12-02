@@ -1,7 +1,25 @@
+.fs-12-italic  {
+  font-size: 12px;
+  font-weight: normal;
+  font-style: italic;
+}
+
 .fs-14-bold  {
   font-size: 14px;
   color: var( --main-bg-code);
   font-weight: bold;
+}
+
+.fs-14-italic  {
+  font-size: 14px;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.fs-14-italic-bold  {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .fs-14 {
@@ -15,10 +33,18 @@
   font-weight: bold;
 }
 
+.fs-16-italic-bold {
+  font-size: 16px;
+  font-weight: bold;
+  font-style: italic;
+}
+
 .fs-18 {
   font-size: 18px;
   font-weight: normal;
 }
+
+
 
 .fs-18-italic {
   font-size: 18px;

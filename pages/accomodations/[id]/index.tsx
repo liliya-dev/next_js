@@ -17,7 +17,9 @@ const AccomodationPage: NextPage<Props> = ({ data, photos }) => {
 
 AccomodationPage.getInitialProps = async (context: NextPageContext) => {
     const id = context.query.id;
+    console.log(id, 99987789)
     const data = await getCurrentHotel(id)
+    console.log(data)
     const photos = await getCurrentHotelPhotots(id)
     
     

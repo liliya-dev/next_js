@@ -109,7 +109,7 @@ export interface Hotel {
         additionalInfo: {
           description: string,
           details: {
-            amentities: string[]
+            amenities: string[]
           }
         },
         bedChoices: {

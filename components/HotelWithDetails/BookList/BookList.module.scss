@@ -1,0 +1,15 @@
+.headersList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr 0.6fr;
+  font-style: italic;
+  align-items: center;
+  background-color: rgba(var(--main-bg-code), 0.9);
+  color: var(--text-color);
+
+  & > li {
+    border: 1px solid rgba(var(--border-color-code), 0.4);
+    height: 100%;
+    padding: 10px;
+  }
+}

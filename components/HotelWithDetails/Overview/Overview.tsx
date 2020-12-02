@@ -11,10 +11,13 @@ interface Props {
 }
 
 export const Overview: React.FC<Props> = ({ overview }) => {
-  console.log(overview.overviewSections)
+  function createMarkup(value) {
+    return {__html: value};
+  }
+
   return (
     <div className={classes.overviewContainer}>
-      <h4>
+      <h4 className={classes.title}>
         Hotel overview:
       </h4>
       {
@@ -22,12 +25,15 @@ export const Overview: React.FC<Props> = ({ overview }) => {
           <ul className={classes.overviewSection}>
             {
               overview.overviewSections.map(overviewItem => (
-                <li>
-                  {overviewItem.title && overviewItem.title}
-                  <ul>
+                <li className={classes.overviewItem}>
+                  <p className={`${classes.overviewTitle} fs-16-italic-bold`}>{overviewItem.title && overviewItem.title}</p>
+                  <ul className={classes.overviewSmallList}>
                     {
                       overviewItem.content.map(item => (
-                        <li><span>&#10004;</span> {item}</li>
+                        <li className={`${classes.overviewSmallItem} fs-14-italic`}>
+                          <span className={classes.check}>&#10004;</span> 
+                          <p dangerouslySetInnerHTML={createMarkup(item)}></p>
+                        </li>
                       ))
                     }
                   </ul>

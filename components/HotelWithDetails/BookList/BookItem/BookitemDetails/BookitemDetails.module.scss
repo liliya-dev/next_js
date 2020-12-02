@@ -1,0 +1,134 @@
+.container {
+  padding: 0px 30px 30px 30px;
+  background-color: var(--text-color);
+  z-index: 3;
+  position: fixed;
+  left: 15vw;
+  top: 40px;
+  width: 70vw;
+  height: 80vh!important;
+  overflow: scroll;
+  -webkit-box-shadow: 4px 0px 7px 5px rgba(0,0,0,0.57); 
+  box-shadow: 4px 0px 7px 5px rgba(0,0,0,0.57);
+  border-radius: 10px 0;
+}
+
+.closeButton {
+  box-sizing: border-box;
+  height: 40px;
+  width: 40px;
+  font-size: 40px;
+  line-height: 40px;
+  color: rgba(var(--main-bg-code), 1);
+  transform: rotate(45deg);
+  border: none;
+  background-color: transparent;
+
+  &:hover {
+    color: rgba(var(--main-bg-code), 0.8);
+  }
+
+  &:active {
+    color: rgba(var(--main-bg-code), 1);
+  }
+}
+
+.photos {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.photosTitle {
+  position: absolute;
+  top: 5px;
+  left: 45px;
+  background-color: rgba(var(--border-color-code), 0.9);
+  color: var(--text-color);
+  padding: 0px 6px;
+  border-radius: 4px;
+}
+
+.mainPhoto {
+  border-radius: 4px;
+  margin-bottom: 10px;
+  width: 350px;
+  height: 220px;
+}
+
+.photosList {
+  display: flex;
+}
+
+.photosListWrapper {
+  overflow-x: scroll;
+  width: 400px;
+  transition: 0.5s;
+}
+
+.photosItem {
+  margin-right: 3px;
+  height: 82px;
+  & > img {
+    width: 130px;
+    height: 76px;
+  }
+}
+
+.moveButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  padding: 5px;
+  background-color: rgba(var(--border-color-code), 0.9);
+  position: absolute;
+  top: 110px;
+
+  & > img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.previousButton {
+  left: 45px;
+  transform: rotate(180deg);
+}
+
+.nextButton {
+  right: 45px;
+}
+
+.optionsWrapper {
+  width: 45%;
+}
+
+.optionsTitle {
+  margin-bottom: 15px;
+}
+
+.options {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.topRow {
+  width: 100%;
+  display: flex;
+  padding-top: 20px;
+}
+
+.title {
+  position: sticky;
+  top: -10px;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--text-color);
+  padding-top: 10px;
+  border-bottom: 1px solid rgba(var(--border-color-code), 0.8);
+}
