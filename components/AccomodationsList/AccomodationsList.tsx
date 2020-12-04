@@ -5,41 +5,62 @@ import Loader from 'react-loader-spinner'
 
 interface Props {
   hotels: searchResult[],
-  isLoaded: boolean
+  isLoaded: boolean,
+  loadMore: () => void,
+  nextPage: number | string,
+  isLoading: boolean
 }
 
-export const AccomodationsList: React.FC<Props> = ({ hotels, isLoaded }) => {
+export const AccomodationsList: React.FC<Props> = ({ hotels, isLoaded, loadMore, nextPage, isLoading }) => {
   return (
-    <div className={classes.accomodations}>
+    <div className={classes.container}>
+      {
+        (hotels && hotels.length === 0 && !isLoaded) && (
+          <Loader
+            type="Audio"
+            color="rgba(17, 18, 54, 0.8)"
+            height={150}
+            width={150}
+            timeout={3000}
+            className={classes.spinner}
+          />
+        )
+      }
       <ul 
-        className={classes.container}
-        onScroll={(ev) => console.log(ev)}
+        className={classes.list}
       >
-        {
-          (!hotels.length && isLoaded) && (
-            <p>No results</p>
-          )
-        }
+        {(!hotels.length && isLoaded) && <p>No results</p>}
         {
           (hotels && hotels.length > 0) && (
-            hotels.map(hotel => (
-              <AccomodationItem hotel={hotel} key={hotel.supplierHotelId} />
+            hotels.map((hotel, index) => (
+              <AccomodationItem hotel={hotel} key={hotel.supplierHotelId + index} />
             ))
           )
         }
-        {
-          (hotels && hotels.length === 0 && !isLoaded) && (
-            <Loader
-              type="Audio"
-              color="rgba(17, 18, 54, 0.8)"
-              height={100}
-              width={100}
-              timeout={3000}
-              className={classes.spinner}
-            />
-          )
-        }
       </ul>
+      {
+        (nextPage !== 1 && hotels.length > 0)  &&  (
+          <button 
+            type="button"
+            className={classes.loadButton} 
+            onClick={loadMore}
+          >
+            {
+              isLoading ? (
+                <Loader
+                  type="Audio"
+                  color="white"
+                  height={20}
+                  width={20}
+                  timeout={3000}
+                  className={classes.buttonSpinner}
+                />
+              ) : ' more results'
+            }
+           
+          </button>
+        )
+      }
     </div>
   )
 }

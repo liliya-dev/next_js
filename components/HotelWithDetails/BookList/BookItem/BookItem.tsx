@@ -95,7 +95,7 @@ export const BookItem: React.FC<Props> = ({ room }) => {
        <ul>
          {
            room.ratePlans[0].features.map(feature => (
-            <li><span className={classes.cancellationIcon} style={{ color: 'green' }}>&#10004;</span> {feature.title}</li>
+            <li key={feature.title}><span className={classes.cancellationIcon} style={{ color: 'green' }}>&#10004;</span> {feature.title}</li>
            ))
          }
        </ul>

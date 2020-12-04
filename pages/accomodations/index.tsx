@@ -1,11 +1,12 @@
+import classes from './AccomodationsPage.module.scss';
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import Link from 'next/link'
 import React, { useEffect, useState } from "react";
 import { AccomodationsList } from "../../components/AccomodationsList/AccomodationsList";
 import { getHotels } from './helpers';
 import { searchResult } from './interface';
-import Link from 'next/link'
-import classes from './accomodationsPage.module.scss';
+import { SearchForm } from '../../components/SearchComponents/SearchForm/SearchForm';
 
 interface Props {
   isError: boolean,
@@ -13,20 +14,41 @@ interface Props {
   count: number,
   page: number,
   nextPage: number,
-  isLoaded: boolean
+  isLoaded: boolean,
+  checkIn: string,
+  checkOut: string,
+  lat: string,
+  lon: string,
+  rooms: string | number,
+  currency: string
 }
 
-const AccomodationsPage: NextPage<Props> = ({ hotels, isError, page, nextPage, isLoaded }) => {
+const AccomodationsPage: NextPage<Props> = ({ 
+  hotels, isError, page, nextPage, isLoaded, checkIn, checkOut, lat, lon, rooms, currency
+}) => {
   const router = useRouter();
   const [hotelsList, setHotelsList] = useState([]);
   const [successLoaded, setSuccessLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    console.log(1)
     setTimeout(() => {
-      setHotelsList([...hotelsList, ...hotels]);
+      const hotelsNew = [...hotels]
+      setHotelsList(hotelsNew);
       setSuccessLoaded(isLoaded);
-    }, 2000)
-  }, [hotels, isLoaded]);
+      setIsLoading(false);
+    }, 300)
+  }, [lat, lon, rooms, currency, checkOut, checkIn]);
+  console.log(hotelsList)
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setHotelsList([...hotelsList, ...hotels]);
+  //     setSuccessLoaded(isLoaded);
+  //     setIsLoading(false);
+  //   }, 300)
+  // }, [hotels, isLoaded]);
 
   useEffect(() => {
     if (page != 1) {
@@ -41,7 +63,8 @@ const AccomodationsPage: NextPage<Props> = ({ hotels, isError, page, nextPage, i
   }, [])
 
   const changePage = () => {
-    setSuccessLoaded(false)
+    setSuccessLoaded(false);
+    setIsLoading(true);
       router.push({
       query: {
         ...router.query,
@@ -55,14 +78,7 @@ const AccomodationsPage: NextPage<Props> = ({ hotels, isError, page, nextPage, i
   }
   return (
     <div className={classes.container}>
-      <button 
-        type="button"
-        className={classes.loadButton} 
-      >
-         <Link href="/search">
-            <a>Back to search</a>
-        </Link>
-      </button>
+      <SearchForm />
       {
         isError 
         ? (
@@ -73,18 +89,13 @@ const AccomodationsPage: NextPage<Props> = ({ hotels, isError, page, nextPage, i
         )
         : (
           <>
-            <AccomodationsList hotels={hotelsList} isLoaded={successLoaded}/>
-            {
-              (nextPage !== 1 && hotelsList.length > 0)  &&  (
-                <button 
-                  type="button"
-                  className={classes.loadButton} 
-                  onClick={changePage}
-                >
-                  more results
-                </button>
-              )
-            }
+            <AccomodationsList 
+              hotels={hotelsList} 
+              isLoaded={successLoaded} 
+              loadMore={changePage}
+              nextPage={nextPage}
+              isLoading={isLoading}
+            />
           </>
         )
       }
@@ -93,10 +104,10 @@ const AccomodationsPage: NextPage<Props> = ({ hotels, isError, page, nextPage, i
 }
 
 export async function getServerSideProps(context) {
-  const { checkIn, checkOut, lat, lon, page } = context.query;
+  const { checkIn, checkOut, lat, lon, page, rooms, currency } = context.query;
   try {
-    const hotels = await getHotels(checkIn, checkOut, lat, lon, page);
-    const nextNumber = hotels.pagination ? hotels.pagination.nextPageNumber : 1;
+    const hotels = await getHotels(checkIn, checkOut, lat, lon, page, rooms, currency);
+    const nextNumber = hotels.pagination && hotels.pagination.nextPageNumber  ? hotels.pagination.nextPageNumber : 1;
     if (hotels.results) {
       return {
         props: {
@@ -104,12 +115,12 @@ export async function getServerSideProps(context) {
           isError: false,
           nextPage: nextNumber,
           page,
-          isLoaded: true
+          isLoaded: true,
+          checkIn, checkOut, lat, lon, rooms, currency
         }
       }
     }
   } catch (error) {
-    console.log(error, 8767)
     return {
       props: {
         hotels: [],

@@ -47,7 +47,7 @@ export const HotelWithDetails: React.FC<Props> = ({ hotelData, photos }) => {
         isInfoVisible && <MoreInfo info={hotelData.body.atAGlance}/>
       }
       <div>
-        <BookList rooms={hotelData.body.roomsAndRates.rooms}/>
+        {hotelData.body.roomsAndRates && <BookList rooms={hotelData.body.roomsAndRates.rooms}/>}
       </div>
     </div>
   )

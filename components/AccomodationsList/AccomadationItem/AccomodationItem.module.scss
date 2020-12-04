@@ -1,10 +1,20 @@
 .container {
-  padding: 16px;
-  border-radius: 4px;
-  border: 1px solid rgba(var( --main-bg-code), 0.3);
-  color: var( --main-bg);
   position: relative;
+  padding: 16px;
   margin-bottom: 20px;
+
+  color: var( --main-bg);
+  border-radius: 4px;
+  border: 1px solid rgba(var(--main-bg-code), 0.3);
+  background-color: rgba(var(--text-color-code), 0.8);
+  -webkit-box-shadow: 1px 1px 15px -1px var(--box-shadow-color); 
+  box-shadow: 1px 1px 15px -1px var(--box-shadow-color);
+  transition: 0.3s;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+  }
 }
 
 .title {

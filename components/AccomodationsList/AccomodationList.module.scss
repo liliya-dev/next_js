@@ -1,9 +1,72 @@
-.container {
+.list {
   width: 100%;
   padding: 20px;
+  height: 90%;
   overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    width: 5px;
+    background: var(--main-bg);
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+  }
 }
 
-.accomodations {
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
+  height: 100%;
+  width: 80%;
+  max-width: 1000px;
+  min-width: 300px;
+  padding: 0 0 40px;
+
+  border: 1px solid rgba(var(--main-bg-code), 0.3);
+  background-color: rgba(var(--text-color-code), 0.8);
+  -webkit-box-shadow: 1px 1px 15px -1px var(--box-shadow-color); 
+  box-shadow: 1px 1px 15px -1px var(--box-shadow-color);
+}
+
+.loadButton {
+  position: relative;
+  width: 155px;
+  height: 45px;
+  margin-top: 20px;
+  padding: 15px 24px;
+
+  background-color: var(--primary-button-color);
+  color: var(--text-color);
+  text-transform: uppercase;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 1;
+  }
+}
+
+.spinner {
+  position: absolute;
+  left: calc(50% - 75px);
+  top: calc(50% - 75px);
+}
+
+.buttonSpinner {
+  position: absolute;
+  left: calc(50% - 10px);
+  top: calc(50% - 10px);
 }

@@ -1,0 +1,48 @@
+.container {
+  position: absolute;
+  width: 100%;
+}
+
+.list {
+  width: 110%;
+  min-height: 120px;
+  padding: 20px;
+
+  position: absolute;
+  top: 50px;
+  left: -5%;
+  z-index: 2;
+
+  background-color: var(--text-color);
+  -webkit-box-shadow: 1px 1px 15px -1px var(--box-shadow-color); 
+  box-shadow: 1px 1px 15px -1px var(--box-shadow-color);
+  border-radius: 0.25rem;
+}
+
+.item {
+  width: 100%;
+  padding: 3px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(var(--main-bg-code), 0.2);
+  }
+
+  & > span {
+    background-color: rgba(var(--main-bg-code), 0.3);
+  }
+}
+
+.text {
+  position: absolute;
+  top: calc(50% - 10px);
+  font-size: 16px;
+  text-align: center;
+  width: 100%;
+}
+
+.spinner {
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+}

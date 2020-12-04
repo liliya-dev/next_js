@@ -72,8 +72,6 @@ interface Props {
 
 
 export const BookList: React.FC<Props> = ({ rooms }) => {
-
-
   return (
     <div>
       <ul className={classes.headersList}>

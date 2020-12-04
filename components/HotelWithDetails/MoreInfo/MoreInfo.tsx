@@ -39,7 +39,7 @@ export const MoreInfo: React.FC<Props> = ({ info }) => {
               <ul>
                 {
                   info.keyFacts.arrivingLeaving.map(option => (
-                    <li>{option}</li>
+                    <li key={option}>{option}</li>
                   ))
                 }
               </ul>
