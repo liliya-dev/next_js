@@ -11,14 +11,10 @@ export const PriceContainer = ({ ratePlan }) => {
           </div>
         )
       }
-      <p className={`${classes.price} fs-30-bold`}>
-        {ratePlan.price.current}
-      </p>
+      <p className={`${classes.price} fs-30-bold`}>{ratePlan.price.current}</p>
       {
         ratePlan.price.old && (
-          <p className={`${classes.oldPrice} fs-18`}>
-            {ratePlan.price.old}
-          </p>
+          <p className={`${classes.oldPrice} fs-18`}>{ratePlan.price.old}</p>
         )
       }
     </div>

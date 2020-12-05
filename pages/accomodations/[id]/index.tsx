@@ -9,7 +9,7 @@ interface Props {
 }
 const AccomodationPage: NextPage<Props> = ({ data, photos }) => {
     return (
-    <div className={classes.accomodationPageContainer}>
+    <div className={classes.container}>
       <HotelWithDetails hotelData={data} photos={photos} />
     </div>
     )
@@ -17,8 +17,8 @@ const AccomodationPage: NextPage<Props> = ({ data, photos }) => {
 
 AccomodationPage.getInitialProps = async (context: NextPageContext) => {
     const { checkIn, checkOut, currency, rooms, id } = context.query;
-    const data = await getCurrentHotel(id, checkIn, checkOut, currency, rooms,)
-    const photos = await getCurrentHotelPhotots(id)
+    const data = await getCurrentHotel(id, checkIn, checkOut, currency, rooms);
+    const photos = await getCurrentHotelPhotots(id);
     
     return { 
       data,

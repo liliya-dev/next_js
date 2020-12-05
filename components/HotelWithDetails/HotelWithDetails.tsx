@@ -14,6 +14,7 @@ interface Props {
 }
 
 export const HotelWithDetails: React.FC<Props> = ({ hotelData, photos }) => {
+  console.log(hotelData, photos)
   const [isInfoVisible, setIsInfoVisible] = useState(false);
 
   return (

@@ -2,20 +2,26 @@ import { searchResult } from './interface';
 import { AccomodationItem } from './AccomadationItem/AccomodationItem';
 import classes from './AccomodationList.module.scss';
 import Loader from 'react-loader-spinner'
+import { SearchButton } from '../SearchButton/SearchButton';
+import { SortOrder } from './SortOrder/SortOrder';
 
 interface Props {
   hotels: searchResult[],
   isLoaded: boolean,
   loadMore: () => void,
   nextPage: number | string,
-  isLoading: boolean
+  isLoading: boolean,
+  setIsLoading: () => void
 }
 
-export const AccomodationsList: React.FC<Props> = ({ hotels, isLoaded, loadMore, nextPage, isLoading }) => {
+export const AccomodationsList: React.FC<Props> = ({ 
+  hotels, isLoaded, loadMore, nextPage, isLoading, setIsLoading 
+}) => {
   return (
     <div className={classes.container}>
+      <SortOrder setIsLoading={setIsLoading}/>
       {
-        (hotels && hotels.length === 0 && !isLoaded) && (
+        isLoading && (
           <Loader
             type="Audio"
             color="rgba(17, 18, 54, 0.8)"
@@ -26,39 +32,23 @@ export const AccomodationsList: React.FC<Props> = ({ hotels, isLoaded, loadMore,
           />
         )
       }
-      <ul 
-        className={classes.list}
-      >
+      <ul className={classes.list}>
         {(!hotels.length && isLoaded) && <p>No results</p>}
         {
           (hotels && hotels.length > 0) && (
             hotels.map((hotel, index) => (
-              <AccomodationItem hotel={hotel} key={hotel.supplierHotelId + index} />
+              <AccomodationItem 
+                setIsLoading={setIsLoading} 
+                hotel={hotel} 
+                key={hotel.supplierHotelId + index} 
+              />
             ))
           )
         }
       </ul>
       {
         (nextPage !== 1 && hotels.length > 0)  &&  (
-          <button 
-            type="button"
-            className={classes.loadButton} 
-            onClick={loadMore}
-          >
-            {
-              isLoading ? (
-                <Loader
-                  type="Audio"
-                  color="white"
-                  height={20}
-                  width={20}
-                  timeout={3000}
-                  className={classes.buttonSpinner}
-                />
-              ) : ' more results'
-            }
-           
-          </button>
+          <SearchButton isLoading={isLoading} handleClick={loadMore} title='more results' />
         )
       }
     </div>

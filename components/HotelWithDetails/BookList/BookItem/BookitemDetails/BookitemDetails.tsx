@@ -54,7 +54,8 @@ interface Props {
         current: string, 
         old: string,
         unformattedCurrent: number,
-        priceBreakdown: {
+        totalPricePerStay: string,
+        priceBreakdown?: {
           lineItems: {
             label: string,
             price: string

@@ -53,7 +53,8 @@ interface Props {
         current: string, 
         old: string,
         unformattedCurrent: number,
-        priceBreakdown: {
+        totalPricePerStay: string,
+        priceBreakdown?: {
           lineItems: {
             label: string,
             price: string
@@ -113,6 +114,16 @@ export const BookItem: React.FC<Props> = ({ room }) => {
      <div className={classes.price}>
         <p className={classes.oldPrice}>{room.ratePlans[0].price.old}</p>
         <p className={classes.currentPrice}>{room.ratePlans[0].price.current}</p>
+        {room.ratePlans[0].price.totalPricePerStay && 
+        <>
+          <p className={classes.currentPrice}>for night</p>
+          <p 
+            className={`${classes.totlaPrice} fs-12`}
+            dangerouslySetInnerHTML={{__html: room.ratePlans[0].price.totalPricePerStay}}
+          >
+          </p>
+        </>
+        }
      </div>
    </div>
   )

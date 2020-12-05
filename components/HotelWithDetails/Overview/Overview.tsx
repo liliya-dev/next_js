@@ -24,13 +24,13 @@ export const Overview: React.FC<Props> = ({ overview }) => {
         overview && overview.overviewSections && (
           <ul className={classes.overviewSection}>
             {
-              overview.overviewSections.map(overviewItem => (
-                <li key={overviewItem.title} className={classes.overviewItem}>
+              overview.overviewSections.map((overviewItem, index) => (
+                <li key={overviewItem.title ? overviewItem.title : overviewItem.title + index} className={classes.overviewItem}>
                   <p className={`${classes.overviewTitle} fs-16-italic-bold`}>{overviewItem.title && overviewItem.title}</p>
                   <ul className={classes.overviewSmallList}>
                     {
-                      overviewItem.content.map(item => (
-                        <li key={item}className={`${classes.overviewSmallItem} fs-14-italic`}>
+                      overviewItem.content.map((item, index) => (
+                        <li key={item + index} className={`${classes.overviewSmallItem} fs-14-italic`}>
                           <span className={classes.check}>&#10004;</span> 
                           <p dangerouslySetInnerHTML={createMarkup(item)}></p>
                         </li>

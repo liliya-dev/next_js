@@ -1,15 +1,16 @@
 .ratingWrapper {
   display: flex;
-  gap: 10px;
   align-items: center;
   margin-bottom: 10px;
 }
 
 .ratingValue {
+  width: fit-content;
   padding: 5px;
+  margin-right: 10px;
+  
   background-color: rgba(var( --main-bg-code), 0.8);
   color: var(--text-color);
   border-radius: 4px;
-  width: fit-content;
   letter-spacing: 1px;
 }

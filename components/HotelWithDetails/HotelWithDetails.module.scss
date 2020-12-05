@@ -2,6 +2,11 @@
   width: 40%;
 }
 
+.container {
+  width: 100%;
+  max-width: 1200px;
+}
+
 .topRow {
   display: flex;
   justify-content: space-between;

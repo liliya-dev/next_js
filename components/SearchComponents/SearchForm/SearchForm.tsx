@@ -1,20 +1,16 @@
 import classes from './SearchForm.module.scss';
-import React, { useEffect, useRef, useState } from "react";
-import { useRouter } from 'next/router'
-import Loader from 'react-loader-spinner';
+import React, { useEffect, useState } from "react";
+import { useRouter } from 'next/router';
 import { DebounceInput } from 'react-debounce-input';
 import { SearchIputDate } from './SearchInputDate/SearchIputDate';
 import { SuggestionsList } from './SuggestionsList/SuggestionsList';
 import { getSuggestions, formatDate } from './helpers';
-import { Counter } from '../../Counter/Counter';
-import { CurrencyList } from '../../CurrencyList/CurrencyList';
+import { Counter } from '../Counter/Counter';
+import { CurrencyList } from '../CurrencyList/CurrencyList';
 import { Suggestion } from './interface';
+import { SearchButton } from '../../SearchButton/SearchButton';
 
-
-interface Props {
-}
-
-export const SearchForm: React.FC<Props> = () => {
+export const SearchForm: React.FC = () => {
   const router = useRouter();
   const [nearBy, setNearBy] = useState('');
   const [selectedPlace, setSelectedPlace] = useState<Suggestion>();
@@ -98,8 +94,6 @@ export const SearchForm: React.FC<Props> = () => {
     setIsVisibleSuggestions(false);
   }
 
-  const childRef = useRef<any>();
-
   return (
     <>
       <div className={classes.currencyWrapper}>
@@ -150,22 +144,7 @@ export const SearchForm: React.FC<Props> = () => {
           </div>
           <div className={classes.dateContainer}>
             <Counter roomsNumber={roomsNumber} setRomsNumber={changeRoomsNumber} />
-            <button className={classes.button} onClick={searchHotels} disabled={isLoading}>
-              { isLoading ? 
-              ( <div className={classes.loadingButton}>
-                  Loading
-                  <Loader
-                    type="Audio"
-                    color="white"
-                    height={15}
-                    width={15}
-                    timeout={3000}
-                    className={classes.spinner}
-                  />
-                </div> )
-                : 'Search'
-              }
-            </button>
+            <SearchButton isLoading={isLoading} handleClick={searchHotels} title='search' />
           </div>
         </div>
       </div>

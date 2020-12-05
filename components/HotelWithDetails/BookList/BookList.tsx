@@ -52,7 +52,8 @@ interface Props {
           current: string, 
           old: string,
           unformattedCurrent: number,
-          priceBreakdown: {
+          totalPricePerStay: string,
+          priceBreakdown?: {
             lineItems: {
               label: string,
               price: string
@@ -82,7 +83,7 @@ export const BookList: React.FC<Props> = ({ rooms }) => {
       </ul>
       <ul>
         {
-          rooms && rooms.map(room => <BookItem key={room.name}room={room} />)
+          rooms && rooms.map(room => <BookItem key={room.name} room={room} />)
         }
       </ul>
     </div>

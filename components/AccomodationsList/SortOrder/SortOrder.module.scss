@@ -1,0 +1,42 @@
+.container {
+  width: 100%;
+}
+
+.list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.item {
+  padding: 5px 15px;
+  margin-bottom: 5px;
+  border: 1px solid var(--border-color);
+  background-color: transparent;
+  transition: 0.3s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(var(--main-bg-code), 0.2);
+  }
+
+  &:active {
+    cursor: pointer;
+    background-color: rgba(var(--main-bg-code), 0.9);
+    color: var(--text-color);
+  }
+}
+
+.activeItem {
+  padding: 5px 15px;
+  margin-bottom: 5px;
+  border: 1px solid var(--border-color);
+  background-color: rgba(var(--main-bg-code), 0.9);
+  color: var(--text-color);
+  transition: 0.3s;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

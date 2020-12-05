@@ -8,9 +8,10 @@ import { useRouter } from 'next/router';
 
 interface Props {
   hotel: searchResult,
+  setIsLoading: () => void
 }
 
-export const AccomodationItem: React.FC<Props> = ({ hotel }) => {
+export const AccomodationItem: React.FC<Props> = ({ hotel, setIsLoading }) => {
   const router = useRouter();
   const { checkIn, checkOut, currency, rooms } = router.query;
 
@@ -18,9 +19,8 @@ export const AccomodationItem: React.FC<Props> = ({ hotel }) => {
       <Link 
         href={`/accomodations/${encodeURIComponent(hotel.id)}?checkIn=${checkIn}&checkOut=${checkOut}&currency=${currency}&rooms=${rooms}`
       }>
-        <li className={classes.container}>
+        <li className={classes.container} onClick={setIsLoading}>
             <p className={`${classes.title} fs-14-bold`}>{hotel.name}</p>
-    
             <p className={`${classes.address} fs-14`}>{formatAddress(hotel.address)}</p>
           <div className={classes.wrapper}>
             <img 
@@ -38,7 +38,7 @@ export const AccomodationItem: React.FC<Props> = ({ hotel }) => {
                     total={hotel.guestReviews.total}
                   />
                 )
-                : <p className="fs-14">No reviews yet</p>
+                : <p className="fs-14-italic">No reviews yet</p>
               }
             </div>
             { hotel.ratePlan && <PriceContainer ratePlan={hotel.ratePlan}/> }

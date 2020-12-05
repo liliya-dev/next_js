@@ -1,7 +1,6 @@
 import classes from './AccomodationsPage.module.scss';
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import Link from 'next/link'
 import React, { useEffect, useState } from "react";
 import { AccomodationsList } from "../../components/AccomodationsList/AccomodationsList";
 import { getHotels } from './helpers';
@@ -24,7 +23,7 @@ interface Props {
 }
 
 const AccomodationsPage: NextPage<Props> = ({ 
-  hotels, isError, page, nextPage, isLoaded, checkIn, checkOut, lat, lon, rooms, currency
+  hotels, isError, page, nextPage, isLoaded
 }) => {
   const router = useRouter();
   const [hotelsList, setHotelsList] = useState([]);
@@ -32,23 +31,17 @@ const AccomodationsPage: NextPage<Props> = ({
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    console.log(1)
+    setIsLoading(true);
     setTimeout(() => {
-      const hotelsNew = [...hotels]
-      setHotelsList(hotelsNew);
+      if (+page === 1) {
+        setHotelsList(hotels);
+      } else {
+        setHotelsList([...hotelsList, ...hotels]);
+      }
       setSuccessLoaded(isLoaded);
       setIsLoading(false);
-    }, 300)
-  }, [lat, lon, rooms, currency, checkOut, checkIn]);
-  console.log(hotelsList)
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setHotelsList([...hotelsList, ...hotels]);
-  //     setSuccessLoaded(isLoaded);
-  //     setIsLoading(false);
-  //   }, 300)
-  // }, [hotels, isLoaded]);
+    }, 30)
+  }, [hotels, isLoaded]);
 
   useEffect(() => {
     if (page != 1) {
@@ -76,6 +69,11 @@ const AccomodationsPage: NextPage<Props> = ({
   const reload = () => {
     router.reload();
   }
+
+  const setLoadingFromChild = () => {
+    setIsLoading(true);
+  }
+
   return (
     <div className={classes.container}>
       <SearchForm />
@@ -95,6 +93,7 @@ const AccomodationsPage: NextPage<Props> = ({
               loadMore={changePage}
               nextPage={nextPage}
               isLoading={isLoading}
+              setIsLoading={setLoadingFromChild}
             />
           </>
         )
@@ -104,9 +103,13 @@ const AccomodationsPage: NextPage<Props> = ({
 }
 
 export async function getServerSideProps(context) {
-  const { checkIn, checkOut, lat, lon, page, rooms, currency } = context.query;
+  let { checkIn, checkOut, lat, lon, page, rooms, currency, sortOrder } = context.query;
+  if (!sortOrder) {
+    sortOrder = 'NO_SORT';
+  }
+
   try {
-    const hotels = await getHotels(checkIn, checkOut, lat, lon, page, rooms, currency);
+    const hotels = await getHotels(checkIn, checkOut, lat, lon, page, rooms, currency, sortOrder);
     const nextNumber = hotels.pagination && hotels.pagination.nextPageNumber  ? hotels.pagination.nextPageNumber : 1;
     if (hotels.results) {
       return {

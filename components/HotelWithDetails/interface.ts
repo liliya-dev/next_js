@@ -152,10 +152,11 @@ export interface Hotel {
             valueAdds: []
           },
           price: {
+            totalPricePerStay: string,
             current: string, 
             old: string,
             unformattedCurrent: number,
-            priceBreakdown: {
+            priceBreakdown?: {
               lineItems: {
                 label: string,
                 price: string

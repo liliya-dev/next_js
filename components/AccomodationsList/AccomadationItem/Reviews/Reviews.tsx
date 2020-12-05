@@ -9,7 +9,7 @@ export const Reviews = ({ unformattedRating, scale, badgeText, total }) => {
       </div>
       <p className="fs-16-bold">{badgeText}</p>
     </span>
-    <p className="fs-14">{total} reviews</p>
+    <p className="fs-14-italic">{total} reviews</p>
   </>
   )
 }
