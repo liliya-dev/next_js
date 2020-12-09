@@ -1,10 +1,17 @@
-.overviewContainer  {
+.container  {
   width: 100%;
 }
 
-.overviewSection {
+.mainTitle {
+  margin-bottom: 15px;
+}
+
+.section {
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 30px;
+  grid-column-gap: 30px;
 }
 
 .check {
@@ -12,11 +19,11 @@
   margin-right: 10px;
 }
 
-.overviewTitle {
+.title {
   margin-bottom: 10px;
 }
 
-.overviewSmallItem {
+.smallItem {
   display: flex;
 
   & > p > b {
@@ -24,10 +31,18 @@
   }
 }
 
-.overviewSmallList {
+.smallList {
   margin-right: 30px;
 }
 
-.title {
-  margin-bottom: 15px;
+@media screen and (max-width: 1250px) {
+  .section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .section {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

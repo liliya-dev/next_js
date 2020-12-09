@@ -17,6 +17,10 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+
+  & > img {
+   height: 320px;
+  }
 }
 
 .imagesListWrapper {
@@ -40,10 +44,11 @@
 
 .moveButton {
   background-color: rgba(94, 102, 102, 0.2);
+  width: 45px;
+  z-index: 2;
   & > img {
     width: 100%;
   }
-  width: 45px;
 
   &:hover {
     background-color: rgba(94, 102, 102, 0.3);
@@ -56,4 +61,18 @@
 
 .previousButton {
   transform: rotate(-180deg);
+}
+
+
+@media screen and (max-width: 1200px) {
+  .mainImageWrapper {
+    max-height: 320px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  
+    & > img {
+     height: 250px;
+    }
+  }
 }

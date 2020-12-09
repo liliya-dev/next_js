@@ -34,7 +34,7 @@ export const Reviews: React.FC<Props> = ({ reviews }) => {
           <ul className={classes.optionsList}>
             {
               reviews.trustYouReviews.map(option => (
-                <li className={classes.optionsItem}>
+                <li className={classes.optionsItem} key={option.categoryName}>
                   <p className="fs-18-italic-bold ">{option.categoryName}</p>
                   <p className="fs-18-italic">
                     <div 

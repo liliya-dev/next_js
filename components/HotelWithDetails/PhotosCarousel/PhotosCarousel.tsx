@@ -32,7 +32,7 @@ export const PhotosCarousel = ({ photos }) => {
           className={`${classes.moveButton} ${classes.previousButton}`}
           onClick={() => setNextIndex('back')}
         >
-          <img src={next} alt=""/>
+          <img src={next} alt="back"/>
         </button>
         <img 
           src={getPhotoUrl(photos[bigPhotoIndex].baseUrl, 'y')} 
@@ -44,7 +44,7 @@ export const PhotosCarousel = ({ photos }) => {
           className={`${classes.moveButton} ${classes.nextButton}`}
           onClick={() => setNextIndex('next')}
         >
-          <img src={next} alt=""/>
+          <img src={next} alt="next"/>
         </button>
       </div>
       <div className={classes.imagesListWrapper} ref={scrollList}>

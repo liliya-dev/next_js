@@ -1,0 +1,42 @@
+
+.containerInput {
+  letter-spacing: 0mm;
+  text-transform: none;
+  color: #111236;
+  font-size: 14px;
+  position: relative;
+}
+
+.input {
+  padding: 6px 12px;
+  background-color: white;
+  width: 240px;
+  height: 48px;
+  border: .0625rem solid #b2b2bf;
+  text-transform: none;
+  color: #111236;
+}
+
+.list {
+  border-radius: .25rem;
+  overflow: hidden;
+  position: absolute;
+  top: 65px;
+  left: 0;
+  z-index: 200;
+  font-size: 12px;
+  -webkit-box-shadow: 1px 1px 15px -1px #000000; 
+  box-shadow: 1px 1px 15px -1px #000000;
+}
+
+.listItem {
+  padding: 18px 12px;
+  background-color: white;
+  width: 240px;
+  height: 48px;
+  border-bottom: .0625rem solid #b2b2bf;
+}
+
+.text {
+  color: white;
+}

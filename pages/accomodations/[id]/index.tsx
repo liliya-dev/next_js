@@ -10,7 +10,9 @@ interface Props {
 const AccomodationPage: NextPage<Props> = ({ data, photos }) => {
     return (
     <div className={classes.container}>
-      <HotelWithDetails hotelData={data} photos={photos} />
+      <div className={classes.wrapper}>
+        <HotelWithDetails hotelData={data} photos={photos} />
+      </div>
     </div>
     )
 }
