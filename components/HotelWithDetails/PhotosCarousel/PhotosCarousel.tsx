@@ -36,7 +36,7 @@ export const PhotosCarousel = ({ photos }) => {
         </button>
         <img 
           src={getPhotoUrl(photos[bigPhotoIndex].baseUrl, 'y')} 
-          alt=""
+          alt="hotel"
           onClick={() => setIsBigCarouselVisible(true)}
         />
         <button 

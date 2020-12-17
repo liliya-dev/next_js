@@ -52,23 +52,20 @@
   }
 }
 
-@media screen and (max-width: 1200px) {
-  .reviewsAndMap {
-    width: 40%;
+@media screen and (max-width: 1000px) {
+  .topRow {
+    flex-direction: column;
+    align-items: center;
   }
 
   .imagesWrapper {
-    width: 50%;
+    width: 100%;
+    max-width: 490px;
   }
-  // .topRow {
-  //   flex-direction: column;
-  //   align-items: center;
-  // }
 
-  // .reviewsAndMap {
-  //   width: 100%;
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  // }
+  .reviewsAndMap {
+    width: 100%;
+    max-width: 470px;
+    margin-top: 15px;
+  }
 }

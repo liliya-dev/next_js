@@ -3,6 +3,8 @@ import { useState, useRef } from 'react';
 import { getPhotoUrl } from '../helpers';
 import classes from './BigSizePhotoCarousel.module.scss';
 
+const ACTIVE_BORDER = '3px solid rgba(0, 166, 152, 0.6)';
+
 export const BigSizePhotoCarousel = ({ photos, closeBigCarousel }) => {
   const [bigPhotoIndex, setBigPhotoIndex] = useState(0);
   const scrollList = useRef(null);
@@ -32,18 +34,19 @@ export const BigSizePhotoCarousel = ({ photos, closeBigCarousel }) => {
           className={`${classes.moveButton} ${classes.previousButton}`}
           onClick={() => setNextIndex('back')}
         >
-          <img src={next} alt=""/>
+          <img src={next} alt="back"/>
         </button>
         <img 
           src={getPhotoUrl(photos[bigPhotoIndex].baseUrl, 'z')} 
-          alt=""
+          alt="hotel photo"
+          className={classes.mainImage}
         />
         <button 
           type="button" 
           className={`${classes.moveButton} ${classes.nextButton}`}
           onClick={() => setNextIndex('next')}
         >
-          <img src={next} alt=""/>
+          <img src={next} alt="next"/>
         </button>
       </div>
       <div className={classes.imagesListWrapper} ref={scrollList}>
@@ -53,7 +56,7 @@ export const BigSizePhotoCarousel = ({ photos, closeBigCarousel }) => {
               return (
                 <li 
                   className={classes.imagesListItem}
-                  style={index === bigPhotoIndex ? {border: '3px solid rgba(0, 166, 152, 0.6)'}: {}}
+                  style={index === bigPhotoIndex ? {border: ACTIVE_BORDER }: {}}
                   key={photo.imageId}
                   onClick={() => setBigPhotoIndex(index)}
                 >

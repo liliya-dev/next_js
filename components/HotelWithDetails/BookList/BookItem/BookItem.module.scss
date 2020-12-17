@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr 0.6fr;
+  grid-template-columns: 1fr 1.7fr 1.5fr 1fr;
   font-style: italic;
   align-items: center;
 
@@ -41,4 +41,10 @@
 
 .totlaPrice {
   margin-top: 10px;
+}
+
+@media screen and (max-width: 700px) {
+  .container {
+    grid-template-columns: 100px 200px 150px 150px;
+  }
 }

@@ -8,6 +8,7 @@ interface Props {
   photos: any
 }
 const AccomodationPage: NextPage<Props> = ({ data, photos }) => {
+  console.log(data, 'data')
     return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
@@ -29,3 +30,5 @@ AccomodationPage.getInitialProps = async (context: NextPageContext) => {
   }
 
 export default AccomodationPage;
+
+///on filter update list

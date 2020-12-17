@@ -16,10 +16,12 @@ interface Props {
 export const HotelWithDetails: React.FC<Props> = ({ hotelData, photos }) => {
   const [isInfoVisible, setIsInfoVisible] = useState(false);
   const { latitude, longitude } = hotelData.body.pdpHeader.hotelLocation.coordinates;
+  const { guestReviews, overview, atAGlance, roomsAndRates } = hotelData.body;
+  const { name } = hotelData.body.propertyDescription;
 
   return (
     <div className={classes.container}>
-      <h2 className={classes.title} >{hotelData.body.propertyDescription.name}</h2>
+      <h2 className={classes.title} >{name}</h2>
       <div className={classes.topRow}>
         <div className={classes.imagesWrapper}>
           <PhotosCarousel photos={photos.hotelImages} />
@@ -28,11 +30,11 @@ export const HotelWithDetails: React.FC<Props> = ({ hotelData, photos }) => {
           <div className={classes.map}>
             <Maps isMarkerShown={true} lat={latitude} lon={longitude} />
           </div>
-          <Reviews reviews={hotelData.body.guestReviews} />
+          <Reviews reviews={guestReviews} />
         </div>
       </div>
-      <Overview overview={hotelData.body.overview}/>
-      {/* <button 
+      <Overview overview={overview}/>
+      <button 
         type="button" 
         className={`${classes.infoButton} fs-16-italic-bold`}
         onClick={() => setIsInfoVisible(!isInfoVisible)}
@@ -40,10 +42,10 @@ export const HotelWithDetails: React.FC<Props> = ({ hotelData, photos }) => {
         More info about accomodation 	
         <div style={{ transform: isInfoVisible ? 'rotate(0deg)' : 'rotate(180deg)'}}>&#8679;</div>
       </button>
-      { isInfoVisible && <MoreInfo info={hotelData.body.atAGlance}/> }
+      { isInfoVisible && <MoreInfo info={atAGlance} /> }
       <div>
-        {hotelData.body.roomsAndRates && <BookList rooms={hotelData.body.roomsAndRates.rooms}/>}
-      </div> */}
+        {roomsAndRates && <BookList rooms={roomsAndRates.rooms}/>}
+      </div>
     </div>
   )
 }

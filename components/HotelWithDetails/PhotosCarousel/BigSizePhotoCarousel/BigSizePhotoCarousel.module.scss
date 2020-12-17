@@ -3,6 +3,8 @@
   left: 0;
   top: 0;
   width: 100vw;
+  max-width: 1000px;
+  margin-left: calc(50vw - 500px);
   height: 100%;
   background-color: rgba(202, 191, 191, 0.9);
   z-index: 100;
@@ -43,6 +45,10 @@
   }
 }
 
+.mainImage {
+  width: 800px;
+}
+
 .closeButton {
   position: absolute;
   right: 5%;
@@ -60,7 +66,7 @@
   & > img {
     width: 100%;
   }
-  width: 45px;
+  width: 25px;
 
   &:hover {
     & > img {
@@ -77,4 +83,31 @@
 
 .previousButton {
   transform: rotate(-180deg);
+}
+
+@media screen and (max-width: 1000px) {
+  .mainImage {
+    width: 500px;
+  }
+
+  .container {
+    margin-left: calc(50vw - 350px);
+    width: 700px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .mainImage {
+    width: 220px;
+  }
+
+  .container {
+    margin-left: calc(50vw - 50%);
+    width: 100%;
+  }
+
+  .closeButton {
+    position: absolute;
+    top: -15px;
+  }
 }

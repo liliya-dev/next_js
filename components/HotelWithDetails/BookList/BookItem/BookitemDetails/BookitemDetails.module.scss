@@ -3,9 +3,10 @@
   background-color: var(--text-color);
   z-index: 3;
   position: fixed;
-  left: 15vw;
+  margin: 0 auto;
   top: 40px;
-  width: 70vw;
+  left: calc(50% - 425px);
+  width: 850px;
   height: 80vh!important;
   overflow: scroll;
   -webkit-box-shadow: 4px 0px 7px 5px rgba(0,0,0,0.57); 
@@ -131,4 +132,46 @@
   background-color: var(--text-color);
   padding-top: 10px;
   border-bottom: 1px solid rgba(var(--border-color-code), 0.8);
+}
+
+
+@media screen and (max-width: 950px) {
+  .container {
+    width: 90%;
+    padding: 10px;
+    left: 5%;;
+  }
+
+  .topRow {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .photos,
+  .optionsWrapper,
+  .photosListWrapper {
+    width: 100%;
+  }
+
+  .previousButton {
+    left: calc(0%);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .mainPhoto {
+    width: 250px;
+  }
+  
+.photosListWrapper {
+
+}
+
+  .previousButton {
+    left: 0;
+  }
+
+  .nextButton {
+    right: 0;
+  }
 }

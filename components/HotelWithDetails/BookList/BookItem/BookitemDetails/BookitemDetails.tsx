@@ -109,7 +109,7 @@ export const BookitemDetails: React.FC<Props> = ({ room, closeDetails }) => {
           >
             <img src={next} alt=""/>
           </button>
-          <img src={room.images[activePhotoId].fullSizeUrl} alt="" className={classes.mainPhoto}/>
+          <img src={room.images[activePhotoId].fullSizeUrl} alt="hotel photo" className={classes.mainPhoto}/>
           <button 
             type="button" 
             className={`${classes.moveButton} ${classes.nextButton}`}
