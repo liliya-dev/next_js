@@ -1,7 +1,7 @@
-import { NextPage } from "next";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import classes from './AccomodationsPage.module.scss';
+import { NextPage } from "next";
+import { useRouter } from "next/router";
 import { AccomodationsList } from "../../components/AccomodationsList/AccomodationsList";
 import { getHotels } from '../../components/pages/accomodations/helpers';
 import { searchResult } from '../../components/pages/accomodations/interface';
@@ -22,6 +22,7 @@ interface Props {
   rooms: string | number,
   currency: string
 }
+
 
 const AccomodationsPage: NextPage<Props> = ({ 
   hotels, isError, page, nextPage, isLoaded
