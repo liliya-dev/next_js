@@ -10,7 +10,7 @@ interface Props {
   activeCurrency: string
 }
 
-export const CurrencyList: React.FC<Props> = ({ setCurrency, activeCurrency }) => {
+export const CurrencyList: React.FC<Props> = ({ setCurrency }) => {
   const currencies = [
     { value: 'UAH', image: ukraine },
     { value: 'RUB', image: russia },
