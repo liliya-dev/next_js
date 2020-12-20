@@ -5,11 +5,12 @@ import { ReviewsList } from '../../components/ReviewsList/ReviewsList';
 import classes from './ReviewsPage.module.scss';
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { MainLayout } from '../../components/MainLayout/MainLayout';
 
 interface Props {
   reviews: Reviews,
   isLoaded: boolean,
-  page: string | string[]
+  page: string | string[],
 }
 
 const ReviewsPage: NextPage<Props> = ({ reviews, isLoaded, page }) => {
@@ -55,39 +56,43 @@ const ReviewsPage: NextPage<Props> = ({ reviews, isLoaded, page }) => {
   }, [])
   
   return (
-    <div className={classes.container}>
-      <ul className={classes.list}>
-        {
-          reviewsList.map((reviewsItem, index) => (
-            <ReviewsList 
-              key={reviewsItem.id + page + index} 
-              reviews={reviewsItem.reviews} 
-              isLoading={isLoading}
-              loadMore={loadMore}
-              isLast={index === reviewsList.length - 1}
-              nextPage={reviews.reviewData.guestReviewGroups.guestReviewPagination.nextPage}
-            />
-          ))
-        }
-      </ul>
-    </div>
+    <MainLayout title="reviews">
+      <div className={classes.container}>
+        <ul className={classes.list}>
+          {
+            reviewsList.map((reviewsItem, index) => (
+              <ReviewsList 
+                key={reviewsItem.id + page + index} 
+                reviews={reviewsItem.reviews} 
+                isLoading={isLoading}
+                loadMore={loadMore}
+                isLast={index === reviewsList.length - 1}
+                nextPage={reviews.reviewData.guestReviewGroups.guestReviewPagination.nextPage}
+              />
+            ))
+          }
+        </ul>
+      </div>
+    </MainLayout>
   )
 }
 
-
 ReviewsPage.getInitialProps = async (context: NextPageContext) => {
-  let { id, page } = context.query;
-  if (!page) {
-    page = '1';
+  try {
+    let { id, page } = context.query;
+    if (!page) {
+      page = '1';
+    }
+    const reviews = await getReviews(id, page);
+    
+    return { 
+      reviews,
+      isLoaded: true,
+      page,
+    }
   }
-
-  console.log(page)
-  const reviews = await getReviews(id, page);
-  
-  return { 
-    reviews,
-    isLoaded: true,
-    page
+  catch(error) {
+    console.log(error)
   }
 }
 

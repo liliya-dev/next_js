@@ -1,11 +1,12 @@
-import classes from './AccomodationsPage.module.scss';
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import classes from './AccomodationsPage.module.scss';
 import { AccomodationsList } from "../../components/AccomodationsList/AccomodationsList";
 import { getHotels } from './helpers';
 import { searchResult } from './interface';
 import { SearchForm } from '../../components/SearchComponents/SearchForm/SearchForm';
+import { MainLayout } from '../../components/MainLayout/MainLayout';
 
 interface Props {
   isError: boolean,
@@ -75,30 +76,32 @@ const AccomodationsPage: NextPage<Props> = ({
   }
 
   return (
-    <div className={classes.container}>
-      <SearchForm />
-      {
-        isError 
-        ? (
-          <div>
-            <p>some error occured during request, please try again</p>
-            <button onClick={reload} type="button">try again</button>
-          </div>
-        )
-        : (
-          <>
-            <AccomodationsList 
-              hotels={hotelsList} 
-              isLoaded={successLoaded} 
-              loadMore={changePage}
-              nextPage={nextPage}
-              isLoading={isLoading}
-              setIsLoading={setLoadingFromChild}
-            />
-          </>
-        )
-      }
-    </div>
+    <MainLayout title="results">
+      <div className={classes.container}>
+        <SearchForm />
+        {
+          isError 
+          ? (
+            <div>
+              <p>some error occured during request, please try again</p>
+              <button onClick={reload} type="button">try again</button>
+            </div>
+          )
+          : (
+            <>
+              <AccomodationsList 
+                hotels={hotelsList} 
+                isLoaded={successLoaded} 
+                loadMore={changePage}
+                nextPage={nextPage}
+                isLoading={isLoading}
+                setIsLoading={setLoadingFromChild}
+              />
+            </>
+          )
+        }
+      </div>
+    </MainLayout>
   )
 }
 
@@ -125,7 +128,6 @@ export async function getServerSideProps(context) {
       }
     }
   } catch (error) {
-    console.log(error)
     return {
       props: {
         hotels: [],

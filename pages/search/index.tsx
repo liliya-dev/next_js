@@ -1,14 +1,17 @@
 import classes from './SearchPage.module.scss';
 import { NextPage } from 'next';
+import { MainLayout } from '../../components/MainLayout/MainLayout';
 import { SearchForm } from '../../components/SearchComponents/SearchForm/SearchForm';
 
 
 const SearchPage: NextPage = () => {
 
   return (
-    <div className={classes.page}>
-      <SearchForm />
-    </div>
+    <MainLayout title='search'>
+      <div className={classes.page}>
+        <SearchForm />
+      </div>
+    </MainLayout>
   )
 }
   

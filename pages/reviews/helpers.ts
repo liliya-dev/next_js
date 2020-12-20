@@ -10,7 +10,6 @@ export const getReviews = async (id, page) => {
   })
 
   const data = await response.json();
-  console.log(data)
   
   return data
 }
