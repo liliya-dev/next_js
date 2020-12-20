@@ -125,6 +125,7 @@ export const BookitemDetails: React.FC<Props> = ({ room, closeDetails }) => {
               {
                 room.images.map((image, index) => (
                   <li 
+                    key={image.fullSizeUrl}
                     className={classes.photosItem}
                     style={index === activePhotoId ? {border: '3px solid rgba(0, 166, 152, 0.6)'}: {}}
                     onClick={() => setActivePhotoId(index)}

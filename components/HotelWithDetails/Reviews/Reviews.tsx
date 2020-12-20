@@ -33,7 +33,7 @@ export const Reviews: React.FC<Props> = ({ reviews, id }) => {
             <p className="fs-20-bold">{reviews.brands.badgeText}</p>
           </span>
           <Link href={`/reviews/${encodeURIComponent(id)}`}>
-            <p className="fs-18">See all {reviews.brands.total} reviews</p>
+            <p className={`${classes.link} fs-18`}>See all {reviews.brands.total} reviews</p>
           </Link>
           <ul className={classes.optionsList}>
             {

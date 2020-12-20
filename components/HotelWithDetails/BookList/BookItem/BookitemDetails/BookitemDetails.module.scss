@@ -67,6 +67,9 @@
   overflow-x: scroll;
   width: 400px;
   transition: 0.5s;
+    display: flex;
+    justify-content: center;
+  
 }
 
 .photosItem {
@@ -163,9 +166,7 @@
     width: 250px;
   }
   
-.photosListWrapper {
 
-}
 
   .previousButton {
     left: 0;
