@@ -23,6 +23,7 @@ interface Props {
   currency: string
 }
 
+
 const AccomodationsPage: NextPage<Props> = ({ 
   hotels, isError, page, nextPage, isLoaded
 }) => {
