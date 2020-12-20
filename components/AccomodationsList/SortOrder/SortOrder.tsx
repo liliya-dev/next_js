@@ -35,7 +35,8 @@ export const SortOrder: React.FC<Props> = ({ setIsLoading }) => {
       pathname: '/accomodations',
       query: {
         ...router.query,
-        sortOrder: options[index].value
+        sortOrder: options[index].value,
+        page: 1
       }
     })
   }

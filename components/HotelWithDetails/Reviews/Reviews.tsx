@@ -1,4 +1,5 @@
 import classes from './Reviews.module.scss';
+import Link from 'next/link'
 
 interface Props {
   reviews: {
@@ -16,9 +17,10 @@ interface Props {
       text: string
     }[]
   },
+  id: string
 }
 
-export const Reviews: React.FC<Props> = ({ reviews }) => {
+export const Reviews: React.FC<Props> = ({ reviews, id }) => {
   return (
     <div>
       {
@@ -30,10 +32,12 @@ export const Reviews: React.FC<Props> = ({ reviews }) => {
             </div>
             <p className="fs-20-bold">{reviews.brands.badgeText}</p>
           </span>
-          <p className="fs-18">See all {reviews.brands.total} reviews</p>
+          <Link href={`/reviews/${encodeURIComponent(id)}`}>
+            <p className="fs-18">See all {reviews.brands.total} reviews</p>
+          </Link>
           <ul className={classes.optionsList}>
             {
-              reviews.trustYouReviews.map(option => (
+              reviews.trustYouReviews && reviews.trustYouReviews.map(option => (
                 <li className={classes.optionsItem} key={option.categoryName}>
                   <p className="fs-18-italic-bold ">{option.categoryName}</p>
                   <p className="fs-18-italic">

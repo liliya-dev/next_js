@@ -9,21 +9,25 @@ import { Counter } from '../Counter/Counter';
 import { CurrencyList } from '../CurrencyList/CurrencyList';
 import { Suggestion } from './interface';
 import { SearchButton } from '../../SearchButton/SearchButton';
+import { getInitialValue } from './helpers';
 
 export const SearchForm: React.FC = () => {
   const router = useRouter();
-  const [nearBy, setNearBy] = useState('');
+  const { 
+    initialMaxDate, initialMinDate, initialNearBy, initialCurrency, initialRooms, lat, lon 
+  } = getInitialValue(router);
+  const [nearBy, setNearBy] = useState(initialNearBy);
   const [selectedPlace, setSelectedPlace] = useState<Suggestion>();
   const [isVisibleSuggestions, setIsVisibleSuggestions] = useState(false);
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
-  const [minDate, setMinDate] = useState(Date.now());
-  const [maxDate, setMaxDate] = useState(Date.now() +  86400000);
+  const [minDate, setMinDate] = useState(initialMinDate);
+  const [maxDate, setMaxDate] = useState(initialMaxDate);
   const [checkIn, setCheckIn] = useState(formatDate(minDate));
   const [checkOut, setCheckOut] = useState(formatDate(maxDate));
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [roomsNumber, setRoomsNumber] = useState(1);
-  const [currency, setCurrency] = useState('UAH');
+  const [roomsNumber, setRoomsNumber] = useState(+initialRooms);
+  const [currency, setCurrency] = useState(initialCurrency);
   const [isCurrencyVisisble, setCurrencyVisisble] = useState(false);
 
   const changeRoomsNumber = (value: number) => {
@@ -73,16 +77,18 @@ export const SearchForm: React.FC = () => {
     if (nearBy === '') {
       return;
     } else {
+      console.log(selectedPlace.longitude)
       router.push({
         pathname: '/accomodations',
         query: {
           checkIn,
           checkOut,
-          lat: selectedPlace.latitude,
-          lon: selectedPlace.longitude,
+          lat: selectedPlace.latitude || lat,
+          lon: selectedPlace.longitude || lon,
           page: 1,
           rooms: roomsNumber,
-          currency
+          currency,
+          nearBy
         }
       })
     }

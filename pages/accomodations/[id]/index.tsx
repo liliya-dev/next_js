@@ -19,16 +19,14 @@ const AccomodationPage: NextPage<Props> = ({ data, photos }) => {
 }
 
 AccomodationPage.getInitialProps = async (context: NextPageContext) => {
-    const { checkIn, checkOut, currency, rooms, id } = context.query;
-    const data = await getCurrentHotel(id, checkIn, checkOut, currency, rooms);
-    const photos = await getCurrentHotelPhotots(id);
-    
-    return { 
-      data,
-      photos
-    }
+  const { checkIn, checkOut, currency, rooms, id } = context.query;
+  const data = await getCurrentHotel(id, checkIn, checkOut, currency, rooms);
+  const photos = await getCurrentHotelPhotots(id);
+  
+  return { 
+    data,
+    photos
   }
+}
 
 export default AccomodationPage;
-
-///on filter update list

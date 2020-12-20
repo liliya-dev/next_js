@@ -104,6 +104,7 @@ const AccomodationsPage: NextPage<Props> = ({
 
 export async function getServerSideProps(context) {
   let { checkIn, checkOut, lat, lon, page, rooms, currency, sortOrder } = context.query;
+
   if (!sortOrder) {
     sortOrder = 'NO_SORT';
   }

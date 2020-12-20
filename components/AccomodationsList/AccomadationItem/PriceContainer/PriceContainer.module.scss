@@ -23,3 +23,13 @@
   align-items: flex-end;
   text-align: right;
 }
+
+@media screen and (max-width: 700px) {
+  .priceContainer {
+    align-items: center;
+  }
+
+  .sale {
+    margin: 15px 0;
+  }
+}

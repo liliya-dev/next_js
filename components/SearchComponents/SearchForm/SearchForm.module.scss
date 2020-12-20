@@ -2,7 +2,7 @@
   width: 50%;
   min-width: 320px;
   max-width: 450px;
-  padding: 24px;
+  padding: 54px 24px 24px 24px;
   background-color: rgba(var(--main-bg-code), 0.7);
   border-radius: .25rem;
 }
@@ -28,8 +28,9 @@
 .currencyWrapper {
   position: absolute;
   width: 100px;
-  left: 50px;
+  left: 24px;
   top: 20px;
+  z-index: 3;
 }
 
 .dateContainer {

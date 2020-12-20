@@ -4,7 +4,6 @@ import russia from './images/russia.png';
 import ukraine from './images/ukraine.png';
 import uk from './images/uk.png';
 import china from './images/china.png';
-import europe from './images/europe.png';
 
 interface Props {
   setCurrency: (value: string) => void,
@@ -15,7 +14,6 @@ export const CurrencyList: React.FC<Props> = ({ setCurrency, activeCurrency }) =
   const currencies = [
     { value: 'UAH', image: ukraine },
     { value: 'RUB', image: russia },
-    { value: 'EUR', image: europe },
     { value: 'USD', image: usa },
     { value: 'GBR', image: uk },
     { value: 'CNY', image: china }

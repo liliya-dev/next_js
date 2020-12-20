@@ -14,3 +14,13 @@
   border-radius: 4px;
   letter-spacing: 1px;
 }
+
+@media screen and (max-width: 700px) {
+  .ratingWrapper {
+    margin: 15px 0;
+  }
+
+  .ratingText {
+    text-align: center;
+  }
+}

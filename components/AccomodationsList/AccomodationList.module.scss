@@ -44,3 +44,10 @@
   top: calc(50vh - 70px);
   z-index: 3;
 }
+
+@media screen and (max-width: 700px) {
+  .container {
+    padding-top: 10px;
+  }
+}
+

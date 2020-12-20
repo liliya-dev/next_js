@@ -23,9 +23,24 @@ export const getSuggestions = async (query) => {
 
 export const formatDate = (value: number) => {
   const date = new Date(value)
-  const month = date.getMonth() + 1;
+  const month = `${date.getMonth() + 1}`.length === 1 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
   const day = `${date.getDate()}`.length === 1 ? `0${date.getDate()}` : `${date.getDate()}`;
   const year = date.getFullYear();
 
   return [year, month, day].join('-');
 }
+
+export const getInitialValue = (router) => {
+  const isAccomodations = router.pathname === '/accomodations';
+  const { rooms, currency, nearBy, lat, lon } = router.query;
+  const initialRooms = isAccomodations ? rooms : 1;
+  const initialCurrency = isAccomodations ? currency : 'UAH';
+  const initialNearBy = isAccomodations ? nearBy : ''
+  const initialMinDate = isAccomodations ? Date.parse(router.query.checkIn) : Date.now();
+  const initialMaxDate = isAccomodations ? Date.parse(router.query.checkOut) : Date.now() +  86400000;
+  console.log(initialMaxDate, initialMinDate, initialNearBy, initialCurrency, initialRooms, lat, lon)
+  return {
+    initialMaxDate, initialMinDate, initialNearBy, initialCurrency, initialRooms, lat, lon
+  }
+}
+
