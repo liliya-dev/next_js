@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import classes from './AccomodationsPage.module.scss';
 import { AccomodationsList } from "../../components/AccomodationsList/AccomodationsList";
-import { getHotels } from './helpers';
-import { searchResult } from './interface';
+import { getHotels } from '../../components/pages/accomodations/helpers';
+import { searchResult } from '../../components/pages/accomodations/interface';
 import { SearchForm } from '../../components/SearchComponents/SearchForm/SearchForm';
 import { MainLayout } from '../../components/MainLayout/MainLayout';
 

@@ -1,6 +1,6 @@
 import { NextPage, NextPageContext } from "next";
-import { getReviews } from './helpers'
-import { Reviews } from './interface';
+import { getReviews } from '../../components/pages/reviews/helpers';
+import { Reviews } from '../../components/pages/reviews/interface';
 import { ReviewsList } from '../../components/ReviewsList/ReviewsList';
 import classes from './ReviewsPage.module.scss';
 import { useEffect, useState } from "react";
@@ -16,7 +16,6 @@ interface Props {
 const ReviewsPage: NextPage<Props> = ({ reviews, isLoaded, page }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const [successLoaded, setSuccessLoaded] = useState(false);
   const [reviewsList, setReviewsList] = useState(reviews.reviewData.guestReviewGroups.guestReviews.map(item => item).flat());
   
   useEffect(() => {
@@ -27,13 +26,11 @@ const ReviewsPage: NextPage<Props> = ({ reviews, isLoaded, page }) => {
       } else {
         setReviewsList([...reviewsList, ...reviews.reviewData.guestReviewGroups.guestReviews.map(item => item).flat()]);
       }
-      setSuccessLoaded(isLoaded);
       setIsLoading(false);
     }, 30)
   }, [reviews, isLoaded]);
 
   const loadMore = () => {
-    setSuccessLoaded(false);
     setIsLoading(true);
       router.push({
       query: {
