@@ -24,7 +24,7 @@ export const CurrencyList: React.FC<Props> = ({ setCurrency }) => {
         currencies.map(currency => (
         <li className={classes.option} key={currency.value} onClick={() => setCurrency(currency.value)}>
           <img className={classes.image} src={currency.image} alt={currency.value} />
-          <p style={{ fontWeight: 'bold'}}>{currency.value}</p>
+          <p style={{ fontWeight: 'bold' }}>{currency.value}</p>
         </li>
         ))
       }

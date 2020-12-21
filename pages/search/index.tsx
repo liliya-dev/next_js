@@ -3,7 +3,6 @@ import { NextPage } from 'next';
 import { MainLayout } from '../../components/MainLayout/MainLayout';
 import { SearchForm } from '../../components/SearchComponents/SearchForm/SearchForm';
 
-
 const SearchPage: NextPage = () => {
 
   return (

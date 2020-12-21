@@ -7,6 +7,7 @@ import { getHotels } from '../../utils/accomodations/helpers';
 import { searchResult } from '../../utils/accomodations/interface';
 import { SearchForm } from '../../components/SearchComponents/SearchForm/SearchForm';
 import { MainLayout } from '../../components/MainLayout/MainLayout';
+import { ReloadButton } from '../../components/ReloadButton/ReloadButton';
 
 interface Props {
   isError: boolean,
@@ -29,7 +30,7 @@ const AccomodationsPage: NextPage<Props> = ({
   const router = useRouter();
   const [hotelsList, setHotelsList] = useState([]);
   const [successLoaded, setSuccessLoaded] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
@@ -45,6 +46,7 @@ const AccomodationsPage: NextPage<Props> = ({
   }, [hotels, isLoaded]);
 
   useEffect(() => {
+    setIsLoading(true);
     if (page != 1) {
       setHotelsList([])
       router.push({
@@ -54,21 +56,18 @@ const AccomodationsPage: NextPage<Props> = ({
         },
       })
     }
+    setIsLoading(false);
   }, [])
 
   const changePage = () => {
-    setSuccessLoaded(false);
     setIsLoading(true);
+    setSuccessLoaded(false);
       router.push({
       query: {
         ...router.query,
         page: +page + 1
       },
     })
-  }
-
-  const reload = () => {
-    router.reload();
   }
 
   const setLoadingFromChild = () => {
@@ -78,15 +77,10 @@ const AccomodationsPage: NextPage<Props> = ({
   return (
     <MainLayout title="results">
       <div className={classes.container}>
-        <SearchForm />
+        <SearchForm isLoadingFromParent={isLoading} />
         {
           isError 
-          ? (
-            <div>
-              <p>some error occured during request, please try again</p>
-              <button onClick={reload} type="button">try again</button>
-            </div>
-          )
+          ? <ReloadButton />
           : (
             <>
               <AccomodationsList 
@@ -124,6 +118,16 @@ export async function getServerSideProps(context) {
           page,
           isLoaded: true,
           checkIn, checkOut, lat, lon, rooms, currency
+        }
+      }
+    } else {
+      return {
+        props: {
+          hotels: [],
+          isError: true,
+          nextPage: 1,
+          count: 0,
+          page
         }
       }
     }

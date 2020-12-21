@@ -1,11 +1,7 @@
-
-
-
-
 const Start = () => {
 
   return (
-    <h1>uyguyg</h1>
+    <h1>Hello</h1>
   )
 }
   

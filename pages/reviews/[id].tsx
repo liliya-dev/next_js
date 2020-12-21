@@ -6,14 +6,16 @@ import classes from './ReviewsPage.module.scss';
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { MainLayout } from '../../components/MainLayout/MainLayout';
+import { ReloadButton } from "../../components/ReloadButton/ReloadButton";
 
 interface Props {
-  reviews: Reviews,
+  reviews: Reviews | null,
   isLoaded: boolean,
   page: string | string[],
+  isError: boolean
 }
 
-const ReviewsPage: NextPage<Props> = ({ reviews, isLoaded, page }) => {
+const ReviewsPage: NextPage<Props> = ({ reviews, isLoaded, page, isError }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [reviewsList, setReviewsList] = useState(reviews.reviewData.guestReviewGroups.guestReviews.map(item => item).flat());
@@ -55,20 +57,26 @@ const ReviewsPage: NextPage<Props> = ({ reviews, isLoaded, page }) => {
   return (
     <MainLayout title="reviews">
       <div className={classes.container}>
-        <ul className={classes.list}>
-          {
-            reviewsList.map((reviewsItem, index) => (
-              <ReviewsList 
-                key={reviewsItem.id + page + index} 
-                reviews={reviewsItem.reviews} 
-                isLoading={isLoading}
-                loadMore={loadMore}
-                isLast={index === reviewsList.length - 1}
-                nextPage={reviews.reviewData.guestReviewGroups.guestReviewPagination.nextPage}
-              />
-            ))
+        {
+          (isError || !reviewsList)
+            ? <ReloadButton />
+            : (
+              <ul className={classes.list}>
+              {
+                reviewsList.map((reviewsItem, index) => (
+                  <ReviewsList 
+                    key={reviewsItem.id + page + index} 
+                    reviews={reviewsItem.reviews} 
+                    isLoading={isLoading}
+                    loadMore={loadMore}
+                    isLast={index === reviewsList.length - 1}
+                    nextPage={reviews.reviewData.guestReviewGroups.guestReviewPagination.nextPage}
+                  />
+                ))
+              }
+            </ul>
+            )
           }
-        </ul>
       </div>
     </MainLayout>
   )
@@ -86,10 +94,16 @@ ReviewsPage.getInitialProps = async (context: NextPageContext) => {
       reviews,
       isLoaded: true,
       page,
+      isError: false
     }
   }
   catch(error) {
-    console.log(error)
+    return {
+      isError: true,
+      reviews: null,
+      isLoaded: false,
+      page: '1'
+    }
   }
 }
 
