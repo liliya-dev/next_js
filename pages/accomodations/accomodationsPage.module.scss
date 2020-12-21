@@ -1,5 +1,5 @@
 .container {
-  height: 100vh;
+  height: calc(100vh - 37px);
   display: flex;
   background: url('./back.jpg') no-repeat;
   background-size: cover;

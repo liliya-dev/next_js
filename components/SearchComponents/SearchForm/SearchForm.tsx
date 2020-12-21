@@ -79,7 +79,7 @@ export const SearchForm: React.FC<Props> = ({ isLoadingFromParent }) => {
   }
 
   const searchHotels = () => {
-    if (router.pathname !== '/accomodations') {
+    if (router.pathname !== '/accomodations' && nearBy !== '') {
       setIsLoading(true);
     }
     if (nearBy === '') {

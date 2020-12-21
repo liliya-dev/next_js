@@ -1,8 +1,17 @@
-const Start = () => {
+import classes from './searchPage.module.scss';
+import { NextPage } from 'next';
+import { MainLayout } from '../components/MainLayout/MainLayout';
+import { SearchForm } from '../components/SearchComponents/SearchForm/SearchForm';
+
+const StartPage: NextPage = () => {
 
   return (
-    <h1>Hello</h1>
+    <MainLayout title='search'>
+      <div className={classes.page}>
+        <SearchForm />
+      </div>
+    </MainLayout>
   )
 }
   
-export default Start;
+export default StartPage;

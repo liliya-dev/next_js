@@ -12,6 +12,7 @@ export const getHotels = async (checkIn, checkOut, lat, lon, page, rooms, curren
     })
   
     const data = await response.json();
+    console.log(data)
     
     return data.data.body.searchResults;
   }
