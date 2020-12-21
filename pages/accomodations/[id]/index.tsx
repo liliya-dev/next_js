@@ -1,6 +1,6 @@
 import { NextPage, NextPageContext } from 'next';
 import classes from './AccomodationPage.module.scss';
-import { getCurrentHotel,  getCurrentHotelPhotots } from '../../../components/pages/accomodations/helpers';
+import { getCurrentHotel,  getCurrentHotelPhotots } from '../../../utils/accomodations/helpers';
 import { HotelWithDetails } from '../../../components/HotelWithDetails/HotelWithDetails';
 import { MainLayout } from '../../../components/MainLayout/MainLayout';
 

@@ -1,6 +1,6 @@
 import { NextPage, NextPageContext } from "next";
-import { getReviews } from '../../components/pages/reviews/helpers';
-import { Reviews } from '../../components/pages/reviews/interface';
+import { getReviews } from '../../utils/reviews/helpers';
+import { Reviews } from '../../utils/reviews/interface';
 import { ReviewsList } from '../../components/ReviewsList/ReviewsList';
 import classes from './ReviewsPage.module.scss';
 import { useEffect, useState } from "react";
