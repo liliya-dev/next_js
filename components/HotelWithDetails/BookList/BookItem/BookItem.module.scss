@@ -43,6 +43,16 @@
   margin-top: 10px;
 }
 
+.noPhoto {
+  text-align: center;
+  transition: 0.3s;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+  }
+}
+
 @media screen and (max-width: 700px) {
   .container {
     grid-template-columns: 100px 200px 150px 150px;

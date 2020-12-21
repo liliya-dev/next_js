@@ -98,6 +98,7 @@ ReviewsPage.getInitialProps = async (context: NextPageContext) => {
     }
   }
   catch(error) {
+    console.log(error)
     return {
       isError: true,
       reviews: null,

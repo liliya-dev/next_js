@@ -20,13 +20,19 @@ export const BookItem: React.FC<Props> = ({ room }) => {
      <div>
       <h5 className={classes.title}>{room.name}</h5>
      </div>
-     <div className={classes.photos}>
-       <img 
-        onClick={() => setIsDetailVisible(true)}
-        src={room.images[0].thumbnailUrl} 
-        alt={room.name}
-      />
-     </div>
+     {
+       room.images[0] && room.images[0].thumbnailUrl 
+       ? (
+        <div className={classes.photos}>
+          <img 
+            onClick={() => setIsDetailVisible(true)}
+            src={room.images[0].thumbnailUrl} 
+            alt={room.name}
+          />
+        </div>
+       )
+       : <p onClick={() => setIsDetailVisible(true)} className={`fs-18-italic ${classes.noPhoto}`}>No photos yet</p>
+     }
      <div className={classes.cancellationAndFeatures}>
        <ul>
          {

@@ -38,42 +38,52 @@ export const BookitemDetails: React.FC<Props> = ({ room, closeDetails }) => {
         </button>
       </div>
       <div className={classes.topRow}>
-        <div className={classes.photos}>
-          <button 
-            type="button" 
-            className={`${classes.moveButton} ${classes.previousButton}`}
-            onClick={() => setNextIndex('back')}
-          >
-            <img src={next} alt=""/>
-          </button>
-          <img src={room.images[activePhotoId].fullSizeUrl} alt="hotel photo" className={classes.mainPhoto}/>
-          <button 
-            type="button" 
-            className={`${classes.moveButton} ${classes.nextButton}`}
-            onClick={() => setNextIndex('next')}
-          >
-            <img src={next} alt=""/>
-          </button>
-          <div className={classes.photosTitle}>
-            &#128247; {activePhotoId + 1}/{room.images.length} {room.images[activePhotoId].caption}
-          </div>
-          <div className={classes.photosListWrapper} ref={scrollList}>
-            <ul className={classes.photosList}>
-              {
-                room.images.map((image, index) => (
-                  <li 
-                    key={image.fullSizeUrl}
-                    className={classes.photosItem}
-                    style={index === activePhotoId ? { border: HIGHLETED_BORDER_COLOR }: {}}
-                    onClick={() => setActivePhotoId(index)}
-                  >
-                    <img src={image.thumbnailUrl} alt={image.caption} />
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-        </div>
+        {
+          room.images && room.images[activePhotoId] && room.images[activePhotoId].fullSizeUrl 
+          ? (
+            <div className={classes.photos}>
+              <button 
+                type="button" 
+                className={`${classes.moveButton} ${classes.previousButton}`}
+                onClick={() => setNextIndex('back')}
+              >
+                <img src={next} alt=""/>
+              </button>
+              <img src={room.images[activePhotoId].fullSizeUrl} alt="hotel photo" className={classes.mainPhoto}/>
+              <button 
+                type="button" 
+                className={`${classes.moveButton} ${classes.nextButton}`}
+                onClick={() => setNextIndex('next')}
+              >
+                <img src={next} alt=""/>
+              </button>
+              <div className={classes.photosTitle}>
+                &#128247; {activePhotoId + 1}/{room.images.length} {room.images[activePhotoId].caption}
+              </div>
+              <div className={classes.photosListWrapper} ref={scrollList}>
+                <ul className={classes.photosList}>
+                  {
+                    room.images.map((image, index) => (
+                      <li 
+                        key={image.fullSizeUrl}
+                        className={classes.photosItem}
+                        style={index === activePhotoId ? { border: HIGHLETED_BORDER_COLOR }: {}}
+                        onClick={() => setActivePhotoId(index)}
+                      >
+                        <img src={image.thumbnailUrl} alt={image.caption} />
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </div>
+          )
+          : (
+            <div className={classes.photos}>
+              <p className={`fs-18-italic ${classes.noPhoto}`}>No photos yet</p>
+            </div>
+          )
+        }
         <div className={classes.optionsWrapper}>
           <p className={classes.optionsTitle}>Amenities:</p>
           <ul className={classes.options}>

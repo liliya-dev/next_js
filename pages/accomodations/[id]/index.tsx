@@ -36,7 +36,7 @@ AccomodationPage.getInitialProps = async (context: NextPageContext) => {
     const { checkIn, checkOut, currency, rooms, id } = context.query;
     const data = await getCurrentHotel(id, checkIn, checkOut, currency, rooms);
     const photos = await getCurrentHotelPhotots(id);
-    
+    console.log(1)
     return { 
       data,
       photos, 
@@ -45,11 +45,11 @@ AccomodationPage.getInitialProps = async (context: NextPageContext) => {
   }
 
   catch(error) {
+    console.log(error)
     return {  
       isError: true
     }
   }
 }
-
 
 export default AccomodationPage;

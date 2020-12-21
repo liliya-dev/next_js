@@ -9,6 +9,7 @@ import { SuggestionsList } from '../SuggestionsList/SuggestionsList';
 import { Counter } from '../Counter/Counter';
 import { CurrencyList } from '../CurrencyList/CurrencyList';
 import { SearchButton } from '../SearchButton/SearchButton';
+import { ReloadButton } from "../../ReloadButton/ReloadButton";
 
 interface Props {
   isLoadingFromParent?: boolean
@@ -166,7 +167,7 @@ export const SearchForm: React.FC<Props> = ({ isLoadingFromParent }) => {
           </div>
         </div>
       </div>
-      <p className="fs-16-italic-bold"> { isError && 'Some error' } </p>
+      { isError && <ReloadButton /> }
     </>
   )
 }
