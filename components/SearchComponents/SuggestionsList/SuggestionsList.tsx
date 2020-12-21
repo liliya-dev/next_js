@@ -1,6 +1,7 @@
 import classes from './SuggestionsList.module.scss';
 import Loader from 'react-loader-spinner';
 import { Suggestion } from '../inteface'; 
+import { ReloadButton } from '../../ReloadButton/ReloadButton';
 
 interface Props {
   suggestions: Suggestion[],
@@ -23,7 +24,7 @@ export const SuggestionsList: React.FC<Props> = ({
 
   const content = () => {
     if (isError) {
-      return <p>Error occured</p>
+      return <ReloadButton />
     } else if (isLoading) {
       return (
         <>

@@ -37,7 +37,7 @@ const AccomodationsPage: NextPage<Props> = ({
   const [windowWidth, setWindowWidth] = useState<number>(0);
   const [isMobileVisible, setIsMobileVisible] = useState(false);
 
-  useWindowResize((event: React.SyntheticEvent) => {
+  useWindowResize(() => {
     setWindowWidth(window.innerWidth);
   });
 
