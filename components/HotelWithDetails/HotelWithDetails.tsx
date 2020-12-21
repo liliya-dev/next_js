@@ -43,7 +43,7 @@ export const HotelWithDetails: React.FC<Props> = ({ hotelData, photos }) => {
         <div style={{ transform: isInfoVisible ? 'rotate(0deg)' : 'rotate(180deg)'}}>&#8679;</div>
       </button>
       { isInfoVisible && <MoreInfo info={atAGlance} /> }
-      <div>
+      <div className={classes.wrapper}> 
         {roomsAndRates && <BookList rooms={roomsAndRates.rooms}/>}
       </div>
     </div>
