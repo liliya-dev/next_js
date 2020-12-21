@@ -1,11 +1,13 @@
-import classes from './AccomodationsPage.module.scss';
+import React, { useEffect, useState } from "react";
+import classes from './accomodationsPage.module.scss';
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
 import { AccomodationsList } from "../../components/AccomodationsList/AccomodationsList";
-import { getHotels } from './helpers';
-import { searchResult } from './interface';
+import { getHotels } from '../../utils/accomodations/helpers';
+import { searchResult } from '../../utils/accomodations/interface';
 import { SearchForm } from '../../components/SearchComponents/SearchForm/SearchForm';
+import { MainLayout } from '../../components/MainLayout/MainLayout';
+import { ReloadButton } from '../../components/ReloadButton/ReloadButton';
 
 interface Props {
   isError: boolean,
@@ -28,7 +30,7 @@ const AccomodationsPage: NextPage<Props> = ({
   const router = useRouter();
   const [hotelsList, setHotelsList] = useState([]);
   const [successLoaded, setSuccessLoaded] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
@@ -44,6 +46,7 @@ const AccomodationsPage: NextPage<Props> = ({
   }, [hotels, isLoaded]);
 
   useEffect(() => {
+    setIsLoading(true);
     if (page != 1) {
       setHotelsList([])
       router.push({
@@ -53,11 +56,12 @@ const AccomodationsPage: NextPage<Props> = ({
         },
       })
     }
+    setIsLoading(false);
   }, [])
 
   const changePage = () => {
-    setSuccessLoaded(false);
     setIsLoading(true);
+    setSuccessLoaded(false);
       router.push({
       query: {
         ...router.query,
@@ -66,39 +70,32 @@ const AccomodationsPage: NextPage<Props> = ({
     })
   }
 
-  const reload = () => {
-    router.reload();
-  }
-
   const setLoadingFromChild = () => {
     setIsLoading(true);
   }
 
   return (
-    <div className={classes.container}>
-      <SearchForm />
-      {
-        isError 
-        ? (
-          <div>
-            <p>some error occured during request, please try again</p>
-            <button onClick={reload} type="button">try again</button>
-          </div>
-        )
-        : (
-          <>
-            <AccomodationsList 
-              hotels={hotelsList} 
-              isLoaded={successLoaded} 
-              loadMore={changePage}
-              nextPage={nextPage}
-              isLoading={isLoading}
-              setIsLoading={setLoadingFromChild}
-            />
-          </>
-        )
-      }
-    </div>
+    <MainLayout title="results">
+      <div className={classes.container}>
+        <SearchForm isLoadingFromParent={isLoading} />
+        {
+          isError 
+          ? <ReloadButton />
+          : (
+            <>
+              <AccomodationsList 
+                hotels={hotelsList} 
+                isLoaded={successLoaded} 
+                loadMore={changePage}
+                nextPage={nextPage}
+                isLoading={isLoading}
+                setIsLoading={setLoadingFromChild}
+              />
+            </>
+          )
+        }
+      </div>
+    </MainLayout>
   )
 }
 
@@ -123,9 +120,18 @@ export async function getServerSideProps(context) {
           checkIn, checkOut, lat, lon, rooms, currency
         }
       }
+    } else {
+      return {
+        props: {
+          hotels: [],
+          isError: true,
+          nextPage: 1,
+          count: 0,
+          page
+        }
+      }
     }
   } catch (error) {
-    console.log(error)
     return {
       props: {
         hotels: [],

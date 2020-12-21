@@ -1,10 +1,10 @@
-import { searchResult } from '../interface';
+import Link from 'next/link'
+import { useRouter } from 'next/router';
 import classes from './AccomodationItem.module.scss';
+import { searchResult } from '../interface';
 import { formatAddress } from './helpers';
 import { Reviews } from './Reviews/Reviews';
 import { PriceContainer } from './PriceContainer/PriceContainer';
-import Link from 'next/link'
-import { useRouter } from 'next/router';
 
 interface Props {
   hotel: searchResult,

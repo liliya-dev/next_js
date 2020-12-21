@@ -1,10 +1,8 @@
-import React from "react";
-import { MainLayout } from "../components/Layouts/MainLayout/MainLayout";
+const Start = () => {
 
-export default function Index() {
-    return (
-        <MainLayout title="about">
-            <h1>hello</h1>
-        </MainLayout>
-    )
+  return (
+    <h1>Hello</h1>
+  )
 }
+  
+export default Start;

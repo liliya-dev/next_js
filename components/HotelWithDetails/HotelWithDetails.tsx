@@ -18,7 +18,6 @@ export const HotelWithDetails: React.FC<Props> = ({ hotelData, photos }) => {
   const { latitude, longitude } = hotelData.body.pdpHeader.hotelLocation.coordinates;
   const { guestReviews, overview, atAGlance, roomsAndRates } = hotelData.body;
   const { name } = hotelData.body.propertyDescription;
-  console.log(hotelData)
 
   return (
     <div className={classes.container}>

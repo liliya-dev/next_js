@@ -1,16 +1,10 @@
 import classes from './ReviewsList.module.scss';
 import { ReviewItem } from './ReviewItem/ReviewItem';
-import { SearchButton } from '../SearchButton/SearchButton';
+import { SearchButton } from '../SearchComponents/SearchButton/SearchButton';
+import { Review } from './interface';
 
 interface Props {
-  reviews: {
-    formattedRating: string,
-    postedOn: string,
-    qualitativeBadgeText: string,
-    rating: string,
-    summary: string,
-    title: string
-  }[],
+  reviews: Review[],
   nextPage: boolean,
   isLoading: boolean,
   loadMore: () => void,

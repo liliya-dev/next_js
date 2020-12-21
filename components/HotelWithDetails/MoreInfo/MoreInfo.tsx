@@ -55,7 +55,7 @@ export const MoreInfo: React.FC<Props> = ({ info }) => {
               <ul>
                 {
                   info.keyFacts.hotelSize.map(option => (
-                    <li>{option}</li>
+                    <li key={option}>{option}</li>
                   ))
                 }
               </ul>
@@ -71,7 +71,7 @@ export const MoreInfo: React.FC<Props> = ({ info }) => {
               <ul>
                 {
                   info.keyFacts.requiredAtCheckIn.map(option => (
-                    <li>{option}</li>
+                    <li key={option}>{option}</li>
                   ))
                 }
               </ul>
@@ -87,7 +87,7 @@ export const MoreInfo: React.FC<Props> = ({ info }) => {
               <ul>
                 {
                   info.keyFacts.specialCheckInInstructions.map(option => (
-                    <li>{option}</li>
+                    <li key={option}>{option}</li>
                   ))
                 }
               </ul>

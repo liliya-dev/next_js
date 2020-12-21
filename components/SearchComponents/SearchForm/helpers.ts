@@ -38,7 +38,6 @@ export const getInitialValue = (router) => {
   const initialNearBy = isAccomodations ? nearBy : ''
   const initialMinDate = isAccomodations ? Date.parse(router.query.checkIn) : Date.now();
   const initialMaxDate = isAccomodations ? Date.parse(router.query.checkOut) : Date.now() +  86400000;
-  console.log(initialMaxDate, initialMinDate, initialNearBy, initialCurrency, initialRooms, lat, lon)
   return {
     initialMaxDate, initialMinDate, initialNearBy, initialCurrency, initialRooms, lat, lon
   }

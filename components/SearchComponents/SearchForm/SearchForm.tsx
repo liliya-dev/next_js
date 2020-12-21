@@ -1,17 +1,22 @@
-import classes from './SearchForm.module.scss';
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
+import { Suggestion } from './interface';
 import { DebounceInput } from 'react-debounce-input';
-import { SearchIputDate } from './SearchInputDate/SearchIputDate';
-import { SuggestionsList } from './SuggestionsList/SuggestionsList';
-import { getSuggestions, formatDate } from './helpers';
+import classes from './SearchForm.module.scss';
+import { getSuggestions, formatDate, getInitialValue } from './helpers';
+import { SearchIputDate } from '../SearchInputDate/SearchIputDate';
+import { SuggestionsList } from '../SuggestionsList/SuggestionsList';
 import { Counter } from '../Counter/Counter';
 import { CurrencyList } from '../CurrencyList/CurrencyList';
-import { Suggestion } from './interface';
-import { SearchButton } from '../../SearchButton/SearchButton';
-import { getInitialValue } from './helpers';
+import { SearchButton } from '../SearchButton/SearchButton';
 
-export const SearchForm: React.FC = () => {
+interface Props {
+  isLoadingFromParent?: boolean
+}
+
+const DAY_IN_SECONDS = 86400000;
+
+export const SearchForm: React.FC<Props> = ({ isLoadingFromParent }) => {
   const router = useRouter();
   const { 
     initialMaxDate, initialMinDate, initialNearBy, initialCurrency, initialRooms, lat, lon 
@@ -24,7 +29,7 @@ export const SearchForm: React.FC = () => {
   const [maxDate, setMaxDate] = useState(initialMaxDate);
   const [checkIn, setCheckIn] = useState(formatDate(minDate));
   const [checkOut, setCheckOut] = useState(formatDate(maxDate));
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(isLoadingFromParent || false);
   const [isError, setIsError] = useState(false);
   const [roomsNumber, setRoomsNumber] = useState(+initialRooms);
   const [currency, setCurrency] = useState(initialCurrency);
@@ -63,8 +68,8 @@ export const SearchForm: React.FC = () => {
   const updateDate = (date: number, option: string) => {
     if (option === 'checkin') {
       setCheckIn(formatDate(date));
-      if (date > maxDate - 86400000) {
-        setMaxDate(date + 86400000);
+      if (date > maxDate - DAY_IN_SECONDS) {
+        setMaxDate(date + DAY_IN_SECONDS);
       }
       setMinDate(date);
     } else {
@@ -74,10 +79,12 @@ export const SearchForm: React.FC = () => {
   }
 
   const searchHotels = () => {
+    if (router.pathname !== '/accomodations') {
+      setIsLoading(true);
+    }
     if (nearBy === '') {
       return;
     } else {
-      console.log(selectedPlace.longitude)
       router.push({
         pathname: '/accomodations',
         query: {
@@ -141,7 +148,7 @@ export const SearchForm: React.FC = () => {
               selectedDate={new Date(minDate)}
             />
             <SearchIputDate 
-              minDate={minDate + 86400000}
+              minDate={minDate + DAY_IN_SECONDS}
               text="Check out date"
               updateDate={updateDate}
               option="checkout"
@@ -150,11 +157,16 @@ export const SearchForm: React.FC = () => {
           </div>
           <div className={classes.dateContainer}>
             <Counter roomsNumber={roomsNumber} setRomsNumber={changeRoomsNumber} />
-            <SearchButton isLoading={isLoading} handleClick={searchHotels} title='search' />
+            <SearchButton 
+              isLoading={isLoading} 
+              isLoadingFromParent={isLoadingFromParent} 
+              handleClick={searchHotels} 
+              title='search' 
+            />
           </div>
         </div>
       </div>
-      <p> { isError && 'Some error' } </p>
+      <p className="fs-16-italic-bold"> { isError && 'Some error' } </p>
     </>
   )
 }

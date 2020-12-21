@@ -2,7 +2,7 @@ import { searchResult } from './interface';
 import { AccomodationItem } from './AccomadationItem/AccomodationItem';
 import classes from './AccomodationList.module.scss';
 import Loader from 'react-loader-spinner'
-import { SearchButton } from '../SearchButton/SearchButton';
+import { SearchButton } from '../SearchComponents/SearchButton/SearchButton';
 import { SortOrder } from './SortOrder/SortOrder';
 
 interface Props {
@@ -27,13 +27,13 @@ export const AccomodationsList: React.FC<Props> = ({
             color="rgba(17, 18, 54, 0.8)"
             height={150}
             width={150}
-            timeout={3000}
+            timeout={0}
             className={classes.spinner}
           />
         )
       }
       <ul className={classes.list}>
-        {(!hotels.length && isLoaded) && <p>No results</p>}
+        {(!hotels.length && isLoaded) && <p className="fs-18-italic">No results, try to change request</p>}
         {
           (hotels && hotels.length > 0) && (
             hotels.map((hotel, index) => (

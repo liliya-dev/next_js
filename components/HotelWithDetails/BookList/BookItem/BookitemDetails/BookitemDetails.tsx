@@ -1,77 +1,14 @@
 import { useRef, useState } from 'react';
 import classes from './BookitemDetails.module.scss';
+import { Room } from '../../interface';
 import next from './next.png';
 
 interface Props {
   closeDetails: () => void,
-  room: {
-    additionalInfo: {
-      description: string,
-      details: {
-        amenities: string[]
-      }
-    },
-    bedChoices: {
-      mainOptions: string[]
-    },
-    images: {
-      caption: string,
-      fullSizeUrl: string,
-      thumbnailUrl: string
-    }[],
-    maxOccupancy: {
-      children: number,
-      messageChildren: string,
-      messageTotal: string,
-      total: number
-    }, 
-    name: string,
-    ratePlans: {
-      cancellation: {
-        additionalInfo: string,
-        cancellationDate: string,
-        free: boolean,
-        info: string,
-        refaundable: boolean,
-        title: string
-      },
-      features: {
-        featureType: string,
-        title: string
-      }[],
-      occupancy: {
-        maxAdults: number,
-        maxChildren: number
-      },
-      offers: {
-        offer: {
-          promoType: string,
-          text: string
-        },
-        valueAdds: []
-      },
-      price: {
-        current: string, 
-        old: string,
-        unformattedCurrent: number,
-        totalPricePerStay: string,
-        priceBreakdown?: {
-          lineItems: {
-            label: string,
-            price: string
-          }[],
-          total: {
-            label: string,
-            price: string
-          }
-        }
-      },
-      welcomeRewards: {
-        info: string
-      }
-    }[]
-  }
+  room: Room
 }
+
+const HIGHLETED_BORDER_COLOR = '3px solid rgba(0, 166, 152, 0.6)';
 
 export const BookitemDetails: React.FC<Props> = ({ room, closeDetails }) => {
   const [activePhotoId, setActivePhotoId] = useState(0);
@@ -127,7 +64,7 @@ export const BookitemDetails: React.FC<Props> = ({ room, closeDetails }) => {
                   <li 
                     key={image.fullSizeUrl}
                     className={classes.photosItem}
-                    style={index === activePhotoId ? {border: '3px solid rgba(0, 166, 152, 0.6)'}: {}}
+                    style={index === activePhotoId ? { border: HIGHLETED_BORDER_COLOR }: {}}
                     onClick={() => setActivePhotoId(index)}
                   >
                     <img src={image.thumbnailUrl} alt={image.caption} />
@@ -142,7 +79,7 @@ export const BookitemDetails: React.FC<Props> = ({ room, closeDetails }) => {
           <ul className={classes.options}>
             {
               room.additionalInfo.details && room.additionalInfo.details.amenities && room.additionalInfo.details.amenities.map(option => (
-                <li className={`fs-12-italic`}>&#9733; &nbsp;{option}</li>
+                <li key={option} className={`fs-12-italic`}>&#9733; &nbsp;{option}</li>
               ))
             }
           </ul>

@@ -1,15 +1,9 @@
 import classes from './ReviewItem.module.scss';
 import { formatDate } from './helpers';
+import { Review } from '../interface';
 
 interface Props {
-  review: {
-    formattedRating: string,
-    postedOn: string,
-    qualitativeBadgeText: string,
-    rating: string,
-    summary: string,
-    title: string
-  }
+  review: Review
 }
 
 export const ReviewItem: React.FC<Props> = ({ review }) => {
