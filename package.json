@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "beautiful-react-hooks": "^0.31.0",
     "eslint": "^7.10.0",
     "eslint-plugin-react": "^7.21.2",
     "isomorphic-fetch": "^3.0.0",

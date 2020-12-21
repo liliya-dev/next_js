@@ -5,6 +5,14 @@
   background-size: cover;
 }
 
+.button {
+  border-radius: 4px;
+  padding: 5px 15px;
+  background-color: var(--main-bg);
+  color: var(--text-color);
+  font-weight: bold;
+}
+
 @media screen and (max-width: 900px) {
   .container {
     flex-direction: column;

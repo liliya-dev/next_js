@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useWindowResize } from "beautiful-react-hooks";
 import classes from './accomodationsPage.module.scss';
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -24,6 +25,8 @@ interface Props {
   currency: string
 }
 
+const MOBILE_VIEW = 900;
+
 const AccomodationsPage: NextPage<Props> = ({ 
   hotels, isError, page, nextPage, isLoaded
 }) => {
@@ -31,6 +34,12 @@ const AccomodationsPage: NextPage<Props> = ({
   const [hotelsList, setHotelsList] = useState([]);
   const [successLoaded, setSuccessLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [windowWidth, setWindowWidth] = useState<number>(0);
+  const [isMobileVisible, setIsMobileVisible] = useState(false);
+
+  useWindowResize((event: React.SyntheticEvent) => {
+    setWindowWidth(window.innerWidth);
+  });
 
   useEffect(() => {
     setIsLoading(true);
@@ -46,6 +55,7 @@ const AccomodationsPage: NextPage<Props> = ({
   }, [hotels, isLoaded]);
 
   useEffect(() => {
+    setWindowWidth(window.innerWidth);
     setIsLoading(true);
     if (page != 1) {
       setHotelsList([])
@@ -74,10 +84,27 @@ const AccomodationsPage: NextPage<Props> = ({
     setIsLoading(true);
   }
 
+  const toggleMenu = () => {
+    setIsMobileVisible(!isMobileVisible);
+  }
+
   return (
     <MainLayout title="results">
       <div className={classes.container}>
-        <SearchForm isLoadingFromParent={isLoading} />
+        {
+          windowWidth > MOBILE_VIEW
+            ? <SearchForm isLoadingFromParent={isLoading} />
+            : (
+              isMobileVisible
+              ? (
+                <>
+                  <SearchForm isLoadingFromParent={isLoading} />
+                  <button onClick={toggleMenu} type="button" className={classes.button}>Hide search form &#x279A;</button>
+                </>
+              )
+              : <button onClick={toggleMenu} type="button" className={classes.button}>Show search form &#x2798;</button>
+            )
+        }
         {
           isError 
           ? <ReloadButton />
